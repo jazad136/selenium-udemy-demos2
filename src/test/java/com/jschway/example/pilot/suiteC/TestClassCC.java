@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 public class TestClassCC extends TestBase {
     @Test
     public void TestCC() throws InterruptedException {
-        System.out.println("Starting TestCC");
+        log("Starting TestCC");
         Thread.sleep(5000);
-        System.out.println("Ending TestCC");
-    } 
+        log("Ending TestCC");
+    }
 }
 

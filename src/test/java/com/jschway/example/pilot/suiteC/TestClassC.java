@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 public class TestClassC extends TestBase {
     @Test
     public void TestC() throws InterruptedException {
-        System.out.println("Starting TestC");
+        log("Starting TestC");
         Thread.sleep(5000);
-        System.out.println("Ending TestC");
-    } 
+        log("Ending TestC");
+    }
 }

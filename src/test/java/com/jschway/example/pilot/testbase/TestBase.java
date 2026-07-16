@@ -19,5 +19,22 @@ public class TestBase {
     @AfterMethod
     public void quit() { 
         report.flush();
-    }    
+    }
+    
+    public void log(String msg) { 
+        System.out.println(msg);
+        test.info(msg);
+    }
+    public void pass(String msg) { 
+        System.out.println(msg);
+        test.pass(msg);
+    }
+    public void fail(String msg) { 
+        System.out.println(msg);
+        test.fail(msg);
+    }
+    public void skip(String msg) { 
+        System.out.println(msg);
+        test.skip(msg);
+    }
 }
