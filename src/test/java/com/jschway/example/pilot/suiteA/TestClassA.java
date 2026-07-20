@@ -6,9 +6,11 @@ import org.testng.annotations.Test;
 
 public class TestClassA extends TestBase {
     @Test(dataProviderClass = TestDataProvider.class, dataProvider = "dataProviderSuiteA")
-    public void TestA() throws InterruptedException {
+    public void TestA(String arg1, String arg2) throws InterruptedException {
         log("Starting Test A");
-        Thread.sleep(5000);
+        log("UserName -- " + arg1);
+        log("Password -- " + arg2);
+        Thread.sleep(2000);
         log("Ending Test A");
     }
 }

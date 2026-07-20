@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 
 public class TestClassAA extends TestBase {
     @Test
-    public void TestAA() throws InterruptedException {
+    public void TestAA(String arg1, String arg2) throws InterruptedException {
         log("Starting TestAA");
-        Thread.sleep(5000);
+        log("UserName -- " + arg1);
+        log("Password -- " + arg2);
+        Thread.sleep(2000);
         log("Ending TestAA");
     }
 }
