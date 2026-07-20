@@ -7,7 +7,7 @@ public class TestClassCC extends TestBase {
     @Test
     public void TestCC() throws InterruptedException {
         log("Starting TestCC");
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         log("Ending TestCC");
     }
 }
