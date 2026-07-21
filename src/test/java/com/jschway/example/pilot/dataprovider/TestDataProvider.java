@@ -1,4 +1,4 @@
-package com.jschway.example.extentreportdemo.dataprovider;
+package com.jschway.example.pilot.dataprovider;
 
 import java.lang.reflect.Method;
 import org.testng.annotations.DataProvider;
