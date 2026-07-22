@@ -31,7 +31,7 @@ public class TestDataProvider {
         System.out.println("Test method name: " + method.getName());
         Object data[][] = null;
         if(method.getName().toUpperCase().equals("TESTB")) { 
-            data = new Object[2][2];
+            data = new Object[1][2];
             data[0][0] = "UserName 100";
             data[0][1] = "Password 100";
         }
