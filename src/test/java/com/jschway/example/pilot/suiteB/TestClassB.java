@@ -1,9 +1,16 @@
 package com.jschway.example.pilot.suiteB;
 
-public class TestClassB {
-    public void TestB() throws InterruptedException {
-        System.out.println("Starting TestB");
-        Thread.sleep(5000);
-        System.out.println("Ending TestB");
-    } 
+import com.jschway.example.extentreportdemo.dataprovider.TestDataProvider;
+import com.jschway.example.pilot.testbase.TestBase;
+import org.testng.annotations.Test;
+
+public class TestClassB extends TestBase {
+    @Test(dataProviderClass = TestDataProvider.class, dataProvider = "dataProviderSuiteB")
+    public void TestB(String arg1, String arg2) throws InterruptedException {
+        log("Starting TestB");
+        log("UserName -- " + arg1);
+        log("Password -- " + arg2);
+        Thread.sleep(2000);
+        log("Ending TestB");
+    }
 }
