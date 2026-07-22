@@ -15,6 +15,7 @@ public class TestBase {
     public void init(ITestResult res) { 
         report = ExtentReportManager.getReporter();
         test = report.createTest(res.getMethod().getMethodName().toUpperCase());
+        res.setAttribute("reporterObject", test);
     }
     @AfterMethod
     public void quit() { 
