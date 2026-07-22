@@ -12,15 +12,14 @@ import org.testng.ITestResult;
  * @author JonathanSaddler
  */
 public class CustomListener implements ITestListener {
-    
-    public void onTestSuccess(ITestResult result) { 
-        System.out.println("******** TEST SUCCESS ********");
-        System.out.println("Test Name: " + result.getMethod());
-    }
-    
+ 
     public void onTestFailure(ITestResult result) { 
         System.out.println("******** TEST FAILURE ********");
+        System.out.println("Test Name: " + result.getName());
         System.out.println("Error : " + result.getThrowable().getMessage());
-        
+    }
+       
+    public void onTestSuccess(ITestResult result) { 
+        System.out.println("******** TEST SUCCESS ********");
     }
 }
