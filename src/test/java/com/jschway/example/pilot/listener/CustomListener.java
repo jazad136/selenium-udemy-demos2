@@ -23,7 +23,7 @@ public class CustomListener implements ITestListener {
 //        System.out.println("Attribute Value : " + result.getAttribute("Author"));
         ExtentTest test = (ExtentTest) result.getAttribute("reporterObject");
         test.log(Status.INFO, "Test Case Name : " + result.getName());
-        test.fail(result.getThrowable().getMessage());
+        test.fail("Failure: " + result.getThrowable().getMessage());
     }
        
     public void onTestSuccess(ITestResult result) { 
