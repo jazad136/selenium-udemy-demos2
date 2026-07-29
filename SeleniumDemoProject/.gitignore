@@ -1,0 +1,7 @@
+spark/
+*.html
+nbactions.xml
+nb-configuration.xml
+src/test/resources/drivers/
+doesnotcompile/
+target/
