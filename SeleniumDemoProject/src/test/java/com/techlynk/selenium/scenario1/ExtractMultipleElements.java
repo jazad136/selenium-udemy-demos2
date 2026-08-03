@@ -27,6 +27,19 @@ public class ExtractMultipleElements {
     public void findNumberOfLinksOnWebPageTest() { 
         List<WebElement> allLinks = driver.findElements(By.tagName("a"));
         System.out.println("Number of Links :: " + allLinks.size());
+        
+        WebElement sixthLink = allLinks.get(5);
+        System.out.println("6th Link Text :: " + sixthLink.getText());
+        System.out.println("6th Link URL :: " + sixthLink.getAttribute("href"));
+        
+        System.out.println("********************************");
+        int counter = 1;
+        for(WebElement link : allLinks) {
+            if(link.isDisplayed()) { 
+                System.out.println(counter + ". Link Text is :: " + link.getText() + " --> Link URL is :: " + link.getAttribute("href"));
+                counter++;
+            }
+        }
     }
     @BeforeMethod
     public void init() { 
