@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 public class ExtractTextFromWebElement {
     WebDriver driver = null;
 
-    
     /** Better idea, use a real test website */
     @Test
     public void extractTextFromWebsite() { 
