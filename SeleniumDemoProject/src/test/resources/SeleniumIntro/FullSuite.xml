@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="com.techlynk.example.selenium_SeleniumDemoProject_jar_0.0.1">
+<suite name="Full Suite">
     <parameter name="browser" value="firefox"/>
-    <test name="TimeOut">
+    <test name="Full Suite">
         <classes>
-            <class name="com.techlynk.example.selenium.test.browsers.InvokeDynamicBrowser" />
+            <class name="com.techlynk.selenium.test.browsers.InvokeDynamicBrowser" />
+            <class name="com.techlynk.selenium.scenario1.FindBrokenLinks" />
+            <class name="com.techlynk.selenium.scenario1.HandleIFramesTest" />
         </classes>
     </test>
 </suite>
