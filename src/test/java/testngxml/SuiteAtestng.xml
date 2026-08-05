@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="com.jschway.example.pilot_TestNGPilotProject_jar_0.0.1">
+<suite name="SuiteA">
     <listeners>
         <listener class-name="com.jschway.example.pilot.listener.CustomListener"/>
     </listeners>
-    <test name="All tests for com.jschway.example.pilot_TestNGPilotProject_jar_0.0.1">
-        <packages>
-            <package name=".*"/>
-        </packages>
+    <test name="Test">
+        <classes>
+            <class name="com.jschway.example.pilot.suiteA.TestClassA"/>
+            <class name="com.jschway.example.pilot.suiteA.TestClassAA"/>
+        </classes>
     </test>
-
 </suite>

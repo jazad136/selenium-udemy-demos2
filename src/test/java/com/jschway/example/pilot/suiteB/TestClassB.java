@@ -1,6 +1,6 @@
 package com.jschway.example.pilot.suiteB;
 
-import com.jschway.example.extentreportdemo.dataprovider.TestDataProvider;
+import com.jschway.example.pilot.dataprovider.TestDataProvider;
 import com.jschway.example.pilot.testbase.TestBase;
 import org.testng.annotations.Test;
 
