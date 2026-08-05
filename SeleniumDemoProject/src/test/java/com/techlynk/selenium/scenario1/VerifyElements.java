@@ -16,10 +16,12 @@ import org.testng.annotations.Test;
  *
  * @author JonathanSaddler
  */
-public class VerifyElements {
-    WebDriver driver = null;
+public class VerifyElements extends TestBase {
 
-    @Test
+    public VerifyElements(String testName) { 
+        super(testName);
+    }
+//    @Test
     public void verifyElementDisplayedTest() throws IOException {
         Assert.assertEquals(driver.getTitle(), "jQuery UI");
         
@@ -36,18 +38,32 @@ public class VerifyElements {
         // Click the button
         driver.findElement(By.id("button")).click();
         Assert.assertTrue(elementToVerify.isDisplayed());
+    }
+    @Test
+    public void verifyElementEnabledTest() { 
+        Assert.assertEquals(driver.getTitle(), "jQuery UI");
+        // Click "Spinner" link
+        driver.findElement(By.linkText("Spinner")).click();
+        Assert.assertEquals(driver.getTitle(), "Spinner | jQuery UI");
+        // Switch to frame
+        driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
+        // find the spinner and disable button
+        WebElement targetElement = driver.findElement(By.id("spinner"));
+        WebElement disableBtn = driver.findElement(By.id("disable"));
+        // Verify initial status
+        Assert.assertTrue(targetElement.isEnabled());
+        System.out.println("Element Initial Status :: isEnabled: " + targetElement.isEnabled());
         
-    }
-    @BeforeMethod
-    public void init() { 
-        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-        driver.get("https://jqueryui.com");
-    }
-    
-    @AfterMethod
-    public void finish() { 
-        driver.quit();
+        // click "Toggle disable/enable" button
+        disableBtn.click();        
+        // Verify element is disabled
+        Assert.assertFalse(targetElement.isEnabled());
+        System.out.println("Element Status, After 1st Click :: isEnabled: " + targetElement.isEnabled());
+        
+        // click "Toggle disable/enable" button
+        disableBtn.click();        
+        // Verify element is enabled
+        Assert.assertTrue(targetElement.isEnabled());
+        System.out.println("Element Status, After 2nd Click :: isEnabled: " + targetElement.isEnabled());
     }
 }
