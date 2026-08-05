@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Verify Elements">
+<suite name="Extract Web Page Part">
     <parameter name="browser" value="firefox"/>
-    <test name="Verify Elements">
+    <test name="Extract Web Page Part">
         <classes>
-            <class name="com.techlynk.selenium.scenario1.VerifyElements" />
+            <class name="com.techlynk.selenium.scenario1.ExtractWebPagePart" />
         </classes>
     </test>
 </suite>
