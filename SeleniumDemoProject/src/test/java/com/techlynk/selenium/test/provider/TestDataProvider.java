@@ -16,6 +16,14 @@ public class TestDataProvider {
         };
         return data;
     }
+    @DataProvider
+    public static Object[][] dataProviderScenario2Tests() { 
+        Object[][] data;
+        data = new Object[][]{
+            new Object[]{"Scenario 2", 5}
+        };
+        return data;
+    }
     
     static Object[][] dataProviderScenario1(Method method) { 
         Object data[][] = null;
