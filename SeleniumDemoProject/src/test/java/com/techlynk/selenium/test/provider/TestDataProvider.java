@@ -20,7 +20,7 @@ public class TestDataProvider {
     public static Object[][] dataProviderScenario2Tests() { 
         Object[][] data;
         data = new Object[][]{
-            new Object[]{"Scenario 2", 5}
+            new Object[]{"Scenario 2", 3}
         };
         return data;
     }
