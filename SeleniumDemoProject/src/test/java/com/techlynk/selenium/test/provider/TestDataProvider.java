@@ -17,6 +17,14 @@ public class TestDataProvider {
         return data;
     }
     @DataProvider
+    public static Object[][] dataProviderScenario2TestsNormalSpd() { 
+        Object[][] data;
+        data = new Object[][]{
+            new Object[]{"Scenario 2"}
+        };
+        return data;
+    }
+    @DataProvider
     public static Object[][] dataProviderScenario2Tests() { 
         Object[][] data;
         data = new Object[][]{
@@ -36,9 +44,11 @@ public class TestDataProvider {
         else if(methodName.toUpperCase().equals("VERIFYRADIOBUTTON")) {
             return "Verify Radio Button Test";
         }
+        else if(methodName.toUpperCase().equals("CAPTURESCREENSHOT")) {
+            return "Capture Screen Shot Test";
+        }
         return "Dropdown Test";
     }
-    
     static Object[][] dataProviderScenario1(Method method) { 
         Object data[][] = null;
         if(method.getName().toUpperCase().equals("VERIFYELEMENTDISPLAYEDTEST")) { 
