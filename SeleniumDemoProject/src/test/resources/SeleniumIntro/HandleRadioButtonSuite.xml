@@ -6,11 +6,7 @@
     </listeners>
     <test name="Handle Dropdown">
         <classes>
-            <class name="com.techlynk.selenium.scenario2.HandleDropdown">
-                <methods>
-                    <include name="dropDownMultiSelectTest"/>
-                </methods>
-            </class>
+            <class name="com.techlynk.selenium.scenario2.HandleDropdown" />
         </classes>
     </test>
 </suite>

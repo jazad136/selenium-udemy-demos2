@@ -25,6 +25,20 @@ public class TestDataProvider {
         return data;
     }
     
+    /** Test Name Providers */
+    public static String getTestNameScenario2Suite(String methodName) {
+        if(methodName.toUpperCase().equals("USEDROPDOWNTEST")) { 
+            return "Use Dropdown Test";
+        }
+        else if(methodName.toUpperCase().equals("DROPDOWNMULTISELECTTEST")) {
+            return "Dropdown Multi-Select Test";
+        }
+        else if(methodName.toUpperCase().equals("VERIFYRADIOBUTTON")) {
+            return "Verify Radio Button Test";
+        }
+        return "Dropdown Test";
+    }
+    
     static Object[][] dataProviderScenario1(Method method) { 
         Object data[][] = null;
         if(method.getName().toUpperCase().equals("VERIFYELEMENTDISPLAYEDTEST")) { 
