@@ -1,4 +1,4 @@
-package com.techlynk.example.selenium.test.browsers;
+package com.techlynk.selenium.test.browsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
