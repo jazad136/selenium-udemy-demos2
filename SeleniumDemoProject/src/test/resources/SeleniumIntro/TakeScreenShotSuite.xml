@@ -1,16 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Handle Dropdown">
+<suite name="Take Screenshot">
     <listeners>
         <listener class-name="com.techlynk.selenium.testnglistener.TestInfoPrintListener"/>
     </listeners>
-    <test name="Handle Dropdown">
+    <test name="Take Screenshot">
         <classes>
-            <class name="com.techlynk.selenium.scenario2.HandleDropdown">
-                <methods>
-                    <include name="dropDownMultiSelectTest"/>
-                </methods>
-            </class>
+            <!--<class name="com.techlynk.selenium.scenario2.TakeScreenShot"/>-->
+            <class name="com.techlynk.selenium.scenario2.TakeScreenShot2"/>
         </classes>
     </test>
 </suite>
