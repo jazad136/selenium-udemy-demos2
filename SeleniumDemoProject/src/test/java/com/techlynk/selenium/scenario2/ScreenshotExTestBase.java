@@ -18,10 +18,13 @@ import org.testng.asserts.SoftAssert;
  * @author JonathanSaddler
  */
 public abstract class ScreenshotExTestBase extends ExTestBase{
- 
-    public ScreenshotExTestBase(String testPrepend) {
+    
+    private String screenshotName;
+    public ScreenshotExTestBase(String testPrepend, String screenshotName) {
         super(testPrepend);
+        this.screenshotName = screenshotName;
     }
+    
     
     
 }

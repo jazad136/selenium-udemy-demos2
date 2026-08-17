@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Handle Multiple Tabs">
+    <listeners>
+        <listener class-name="com.techlynk.selenium.testnglistener.TestInfoPrintListener"/>
+    </listeners>
+    <test name="Handle Multiple Tabs">
+        <classes>
+            <class name="com.techlynk.selenium.scenario2.HandleMultipleTabs">
+                <methods>
+                    <!--<include name="getWindowIDTest"/>-->
+                    <include name="getMultipleWindowHandleTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

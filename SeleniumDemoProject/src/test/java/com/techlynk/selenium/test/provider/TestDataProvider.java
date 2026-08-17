@@ -47,6 +47,12 @@ public class TestDataProvider {
         else if(methodName.toUpperCase().equals("CAPTURESCREENSHOT")) {
             return "Capture Screen Shot Test";
         }
+        else if(methodName.toUpperCase().equals("GETMULTIPLEWINDOWHANDLETEST")) {
+            return "Get Multiple Window Handle Test";
+        }
+        else if(methodName.toUpperCase().equals("HANDLEALERTSTEST")) {
+            return "Get Multiple Window Handle Test";
+        }
         return "Dropdown Test";
     }
     static Object[][] dataProviderScenario1(Method method) { 
