@@ -35,4 +35,10 @@ public abstract class SlowExTestBase extends ExTestBase {
         try {  Thread.sleep(waitSeconds*1000); } 
         catch(InterruptedException e) {  throw new RuntimeException("Step execution interrupted."); }
     }
+    public void iWaitFormat(int waitSeconds, String formatMsg, Object... formatObjs) {
+        System.out.printf(formatMsg + "\n", formatObjs);
+        testReport.info(String.format(formatMsg + "\n", formatObjs));
+        try { Thread.sleep(waitSeconds*1000); } 
+        catch(InterruptedException e) { throw new RuntimeException("Step execution interrupted."); }
+    }
 }
