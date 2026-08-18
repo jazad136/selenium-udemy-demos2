@@ -8,7 +8,9 @@
         <classes>
             <class name="com.techlynk.selenium.scenario2.HandleDragAndDrop">
                 <methods>
-                    <include name="draggableTest"/>
+                    <!--<include name="draggableTest"/>-->
+                    <!--<include name="dragAndDropTest"/>-->
+                    <include name="dragAndDropHardenedTest"/>
                 </methods>
             </class>
         </classes>

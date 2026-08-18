@@ -22,6 +22,42 @@ public class HandleDragAndDrop extends SlowExTestBase {
         setTestUrl("https://jqueryui.com");
     }
     
+    @Test
+    public void dragAndDropHardenedTest() { 
+        driver.manage().window().maximize();
+        i("Verifying we are on the jQuery UI home page");
+        Assert.assertEquals(driver.getTitle(), "jQuery UI");
+        i("Navigate to the Droppable page");
+        driver.findElement(By.linkText("Droppable")).click();
+        Assert.assertEquals(driver.getTitle(), "Droppable | jQuery UI");
+        
+        iFormat("Switch to demo-frame, Moving the draggable element to droppable element");
+        
+        driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
+        WebElement draggableEle = driver.findElement(By.id("draggable"));
+        WebElement droppableEle = driver.findElement(By.id("droppable"));
+        Actions action = new Actions(driver);
+        action.clickAndHold(draggableEle).moveToElement(droppableEle).build().perform();
+        iWaitFormat(4, "Moved the element on top of droppable element");
+    }
+    @Test
+    public void dragAndDropTest() { 
+        driver.manage().window().maximize();
+        i("Verifying we are on the jQuery UI home page");
+        Assert.assertEquals(driver.getTitle(), "jQuery UI");
+        i("Navigate to the Droppable page");
+        driver.findElement(By.linkText("Droppable")).click();
+        Assert.assertEquals(driver.getTitle(), "Droppable | jQuery UI");
+        
+        iFormat("Switch to demo-frame, Moving the draggable element to droppable element");
+        
+        driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
+        WebElement draggableEle = driver.findElement(By.id("draggable"));
+        WebElement droppableEle = driver.findElement(By.id("droppable"));
+        Actions action = new Actions(driver);
+        action.dragAndDrop(draggableEle, droppableEle);
+        iWaitFormat(4, "Moved the element on top of droppable element");
+    }
     @Test(dataProvider = "dataProviderDraggable", dataProviderClass=TestDataProvider.class)
     public void draggableTest(int xOffset, int yOffset) { 
         driver.manage().window().maximize();
