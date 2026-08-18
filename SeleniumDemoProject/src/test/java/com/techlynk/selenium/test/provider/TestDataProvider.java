@@ -32,7 +32,14 @@ public class TestDataProvider {
         };
         return data;
     }
-    
+    @DataProvider
+    public static Object[][] dataProviderDraggable() { 
+        Object[][] data = new Object[][]{
+             {50, 50}
+            ,{100, 150}
+        };
+        return data;
+    }
     /** Test Name Providers */
     public static String getTestNameScenario2Suite(String methodName) {
         if(methodName.toUpperCase().equals("USEDROPDOWNTEST")) { 
