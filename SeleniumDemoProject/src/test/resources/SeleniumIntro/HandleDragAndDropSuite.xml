@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Handle Drag and Drop">
+    <listeners>
+        <listener class-name="com.techlynk.selenium.testnglistener.TestInfoPrintListener"/>
+    </listeners>
+    <test name="Handle Drag and Drop">
+        <classes>
+            <class name="com.techlynk.selenium.scenario2.HandleDragAndDrop">
+                <methods>
+                    <!--<include name="draggableTest"/>-->
+                    <!--<include name="dragAndDropTest"/>-->
+                    <include name="dragAndDropHardenedTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

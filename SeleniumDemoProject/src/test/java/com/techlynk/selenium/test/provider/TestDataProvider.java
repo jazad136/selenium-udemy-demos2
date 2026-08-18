@@ -32,7 +32,14 @@ public class TestDataProvider {
         };
         return data;
     }
-    
+    @DataProvider
+    public static Object[][] dataProviderDraggable() { 
+        Object[][] data = new Object[][]{
+             {50, 50}
+            ,{100, 150}
+        };
+        return data;
+    }
     /** Test Name Providers */
     public static String getTestNameScenario2Suite(String methodName) {
         if(methodName.toUpperCase().equals("USEDROPDOWNTEST")) { 
@@ -51,8 +58,12 @@ public class TestDataProvider {
             return "Get Multiple Window Handle Test";
         }
         else if(methodName.toUpperCase().equals("HANDLEALERTSTEST")) {
-            return "Get Multiple Window Handle Test";
+            return "Handle Alert Test";
         }
+        else if(methodName.toUpperCase().equals("PERFORMMOUSEHOVERTEST")) {
+            return "Perform Mouse Hover Test";
+        }
+        
         return "Dropdown Test";
     }
     static Object[][] dataProviderScenario1(Method method) { 
