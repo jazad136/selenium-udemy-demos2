@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.techlynk.selenium.scenario2;
+package com.techlynk.selenium.scenario3;
 
 import com.techlynk.selenium.test.provider.TestDataProvider;
 import java.awt.image.BufferedImage;
@@ -36,14 +32,11 @@ public class TakeScreenShot2 extends ExTestBase {
     
     @Test public void capturePartialScreenShot() { 
         i("Verify Login Title appears");
-        Assert.assertEquals(driver.getTitle(), "Test Login | JS Practice Test Automation");
+        Assert.assertEquals(driver.getTitle(), "Test Login | Practice Test Automation");
         WebElement usernameField =  driver.findElement(By.id("username")); 
         WebElement form =  driver.findElement(By.id("form")); 
         usernameField.sendKeys("MyUsername");
         takeScreenshotOfSpecificArea(form);
-//        i("Find the footer section");
-//        WebElement footerSection = driver.findElement(By.tagName("footer"));
-//        takeScreenshotOfSpecificArea(footerSection);
         
         try { Thread.sleep(1000); } 
         catch(InterruptedException e) { throw new RuntimeException("Interrupted while creating snapshots");}
