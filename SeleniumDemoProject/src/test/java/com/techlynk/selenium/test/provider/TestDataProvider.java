@@ -96,6 +96,9 @@ public class TestDataProvider {
         if(methodName.toUpperCase().equals("HANDLEJSTEST")) {
             return "Handle JavaScript Executor Test";
         }
+        if(methodName.toUpperCase().equals("UPLOADFILETEST")) {
+            return "Upload File Test";
+        }
         return "Advanced Test";
     }
     static Object[][] dataProviderScenario1(Method method) { 
