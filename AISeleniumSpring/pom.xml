@@ -25,11 +25,29 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!-- AI Selenium Dependencies -->
         <dependency>
+			<groupId>com.openai</groupId>
+			<artifactId>openai-java</artifactId>
+			<version>4.6.1</version>
+		</dependency>
+		<dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.46.0</version>
         </dependency>
+		<dependency>
+		    <groupId>com.squareup.okhttp3</groupId>
+		    <artifactId>okhttp</artifactId>
+		    <version>5.0.0</version>
+		    <scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20250517</version>
+		</dependency>
+		<!-- Other dependencies -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -50,14 +68,8 @@
         </dependency>
     </dependencies>
     <build>
-        <resources>
-            <resource><directory>src/main/resources</directory></resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
+        <resources><resource><directory>src/main/resources</directory></resource></resources>
+        <testResources><testResource><directory>src/test/resources</directory></testResource></testResources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
