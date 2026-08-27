@@ -1,0 +1,41 @@
+package com.techlynk.selenium;
+
+import com.openai.client.OpenAIClient;
+import com.openai.client.okhttp.OpenAIOkHttpClient;
+import com.openai.models.responses.Response;
+import com.openai.models.responses.ResponseCreateParams;
+
+public class Main {
+	public static void main(String[] args) {
+		OpenAIClient client = OpenAIOkHttpClient.fromEnv();	
+		
+		ResponseCreateParams params = ResponseCreateParams.builder()
+				.input("Say this a test")
+				.model("gpt-5")
+				.build()
+		;
+		Response response = client.responses().create(params);
+		System.out.println(response.output());	
+	}
+	/*
+	 * Output: 
+	 * 
+	 * [
+	 * ResponseOutputItem
+	 * {reasoning=ResponseReasoningItem
+	 * {id=rs_00218073b981f409006a8c6a7b925487d1ab6a053ef309c6f5, 
+	 * summary=[], 
+	 * type=reasoning, 
+	 * content=[], 
+	 * encryptedContent=gAAAAABqjGqA99ZNMXgY0JJ7G0hlkFGOkrtaub4O4wpli9yzvtLsKA7UDxImxkWHWSuBHsy06otWxHASEWfSW57iSA8sEsmMriaB-LBoDmu4oHx8IEW0vF-33L23_w8vYgcICaL1X-pgfCuQzcYuWH_PAX3I8s6MuUavb--o1lDc-4mJTBrU-CwAIrePdqrHhB3oWGvDBZh2K0FpS30DFCyJC0fNar_sl6mVedU2oWatrnsQYwLZWK19ePvYhiOMFVD__s35nmlWlfTM10QW7nzCVAoNsp4gdEccJMRuZekFJikcfsaDe5lNYwMalNR9DqX44CXuPwS4jc9xdCQGi0TCFn69-an8QAlR_ZLiPaU4_r7dX-Vg6SCai4xO8R6LibfeelGuYAVfbUU14KG6rMwC8iUSfZNb9ImdlVQ3gr0WaLj0FlSifZ5moPtKzeeu6vExXsATIPPV0q0572ZYSXPXD3Tr1S5vOlQf9_dpX_QvmiSY_MUHkvoy1PA040LpfG_f3i8cpwRZaQfzX541yHzxA48lesJ6XCAtiMszlOiVhZLJhXDMIWf_8AXG_5GOs9LTiq4K4PudYw99H4t8lVhyO20GYL9mxnfryxPzaf_qSpk5kKHNIdQLkTaXMmyzF8IkWLdTbmzoW4KfnAYV9qpM6bA5_z5gs0WpqNohZx0AjE60obpKx8RSwEb8auBRv_nkEZjv0u5hypv_p_kHcaswjbTkPbbR0h16923vDjymeq1cQP9Jk4NTwNNOblZB_5GzKZBS7acYQpBQl72yIIYNUH-nAyDeHunahrEapbn_hlM57Nu5qe8AfhcadUm3tJZLCT64OaS8O-h1iq02hqwuYV6fBC4fL9AIbCHDZOm5zw6w96_ncZX_qvLrtSm45_nvIZbNBsYomfq2Zc_ZcPXFd6wgHLoSS4xsoTCF8Hr8P1aNMXUmdeZYWLnN2FHSUnaZWZ3_GJSRD1LadP1zp387qz1mvnWN-aSzQpGQkac21pjtVLvzGWq2RaZmnpesiXA6H3LIQ2qfXTaSCebEYRuue09NC1TXN3KqwSsE7rwNIXcpwRGyvZ35wqeumCLOjziYFWZ4JDz5MyQyA2fUCYjE-1NqSZhkMd8uPisYC6Xi0god_5laqX1ewoYBaxw3gAyPjdqYr-P-iFpeKfYvm2Q9WNoBFwKy2ar3ODeuHMlo3ttMatj6ghRaTj2cS00yEiv7cDHpNjUclRg1cffEy_DrJhLtLYjvEqdMDUr73C53W__ph-3GB0ZR4MfW6LGl3vufFL_SI1L3HATZJ_zuBqxsX5lwmAypJI1iZpWQfcVsp0dNSl2V0ww_imNOxI0DAEzVgknUw_ka9Usot31lVK0iwm12QdfaSv6j1ELuwPXAEL5N9mMDOSWIFVpBTF6TQtOL3XCWhODT6SDyPgYmwAcnnb7ElWTmFpXIqvX-XIjboq7KS8L1BW77TfRT5jUCeSAXXwW9koQKxIdX5Ubh2cCaASw6N69izrFxMNv_V3Lh3uvvqpfXS42p3ZcNybT-yqSyXO9_chq7nj8WmLv6LSkfa76XSALarPyksZ9ImUHwAV4W5fi-QdnwTOH73X6WeYT2sImBX_8LsoikuCcMsv5qx48qApcBmY6MpM3pV6_0Gor_KbGABDDAy2kJo1DWfbufPFD2PysabmeyDJImy9FT7H0EihuueGV8_q3yL1uOhTZoY-ZTBPS4rAmUOoRlOp9FC61vIGkGAYM-61GOJALCWa1ayUzN2OEu8MpoqpPW2NUNaMuWpAgsPHX-wUbKQjZ1A0mGiZtrkNIsK-aFyevOUscqzDGGU9LK14OBruL5OGMjIimaH6TH3KCZNr6Ak9SgWZQ5y8hwPirBZPX34GGoxEby5dTnJ_9T9fF3XcJzeGNQK8U2Zu3U1XIeeBKM9dpe1JbpcxmqjGE8R0k2RV_nVIhjLYi2Wql8ok4c2vxIbJL20hyAU2eeZbmhBd9shdKfBNQSjq1cUNH9UGCI93srdp5Ch_2GBhQuZd6xOS9hipqmUm8qzY4ZziK_-L9CFoPtZzilPdjef0uUWbKj_MfdOw4RQcX5qH_cr1iaJcB_HYlsc8AHIkXB6snRrWAGMLaImj7qoE9eFFoSCQsYkKngLim_AmDfgdQn8uBYFmmitqIk_CrdmpB0XwMHgu4rrdSIkNJfkXtG6fiy3uOfLXVULbkvSvJbdbTLsnQfTw3mhmDQllOTQJPk48Lu27EaaJxFyHEbcs0elbB3DK0BkQke0dpxS1Lz02fNxJgJgTCTZkBrdOiZWJg8nyFTSMVElkDmvIC04MUef8B547gSlpifdBJjGYwQfdw0rLVt8jDnW01mMix-L2eGFdbY45VYFra59LW1dT3tAv8lbDfmTP_YGAgD8VyaF4Px9z1e36v_GJMlIyvjfXQ2HBqURbusWejNrYXwhWCwpypAItyKv8uhBilmv1uarQLrrhMocWicWdt4vNtmkATYCt2btYamoWXfGvorDItrcCHPOosjlHYCdCEf7o_FP7dZ-AK4TSJ-fTjA2sVEOvJ9I-XLFtaaf2g0uT_5wgIWsGqPqQdrjrIYB1_vRbFtijqa5GZku1hBAqdNYEiov60cSL-8MqrUuXhFWn_isT018blQnQzgFA8pmRVPz-RWGlj6ouX5xQTO09eDIuLNzEpQ_N3HIrDYhG7B1rrk0mncfqR07aaOvlK-ylG8AbYGgse-wN8_sp7gSZpH5NgAKuIT6hsOfvYOKy6PM7SnBR5n5-BmW72C1z6ENrgJNh9SLq1TIjGVSeAr4G8C0tIC4ZV4UC6xzSj6C_FkkH2dMnLz2xOtS3EfqwS0Xy2H0ogvMocmBogtCH28wXwMisurgfhCnzJqQM57Agn_xpkciSqjfWjr87a1M0a1lF0pXQqZZw==, status=, additionalProperties={}}}, ResponseOutputItem{message=ResponseOutputMessage{id=msg_00218073b981f409006a8c6a7fde4887d1af4327c0f29597c2, 
+	 * content=[
+	 * Content{outputText=ResponseOutputText
+	 * {annotations=[], 
+	 * text=this a test, 
+	 * type=output_text, logprobs=[], additionalProperties={}}}], 
+	 * role=assistant, 
+	 * status=completed, 
+	 * type=message, 
+	 * additionalProperties={}}}]
+	 */
+}

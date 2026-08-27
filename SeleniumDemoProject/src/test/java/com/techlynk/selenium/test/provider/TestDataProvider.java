@@ -33,10 +33,32 @@ public class TestDataProvider {
         return data;
     }
     @DataProvider
+    public static Object[][] dataProviderScenario3Tests() { 
+        Object[][] data;
+        data = new Object[][]{
+            new Object[]{"Scenario 3", 3}
+        };
+        return data;
+    }
+    @DataProvider
     public static Object[][] dataProviderDraggable() { 
         Object[][] data = new Object[][]{
              {50, 50}
             ,{100, 150}
+        };
+        return data;
+    }
+    @DataProvider
+    public static Object[][] dataProviderTable() { 
+        Object[][] data = new Object[][]{
+             {5, 1, 8, 3}
+        };
+        return data;
+    }
+    @DataProvider
+    public static Object[][] dataProviderJavaScript() { 
+        Object[][] data = new Object[][]{
+             {100}
         };
         return data;
     }
@@ -66,6 +88,19 @@ public class TestDataProvider {
         
         return "Dropdown Test";
     }
+    
+    public static String getTestNameScenario3Suite(String methodName) {
+        if(methodName.toUpperCase().equals("WEBTABLEOPERATIONSTEST")) {
+            return "Web Table Operations Test";
+        }
+        if(methodName.toUpperCase().equals("HANDLEJSTEST")) {
+            return "Handle JavaScript Executor Test";
+        }
+        if(methodName.toUpperCase().equals("UPLOADFILETEST")) {
+            return "Upload File Test";
+        }
+        return "Advanced Test";
+    }
     static Object[][] dataProviderScenario1(Method method) { 
         Object data[][] = null;
         if(method.getName().toUpperCase().equals("VERIFYELEMENTDISPLAYEDTEST")) { 
@@ -80,4 +115,5 @@ public class TestDataProvider {
         }
         return data;
     }
+
 }
