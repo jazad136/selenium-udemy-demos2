@@ -14,23 +14,19 @@ import com.openai.models.chat.completions.ChatCompletionCreateParams;
 
 public class OpenAIClientWrapper {
 	private static final Logger LOGGER = Logger.getLogger(OpenAIClientWrapper.class.getName());
-	private final OpenAIClient client;
-	public OpenAIClientWrapper() {
-		String apiKey = Config.getApiKey();
-		if(apiKey == null || apiKey.isBlank()) 
-			throw new IllegalArgumentException("API key must not be blank");
-		this.client = OpenAIOkHttpClient.builder().apiKey(apiKey).build();
-	}
+	private static OpenAIClient client;
+	
 //	public OpenAIClientWrapper(OpenAIClient client) {
 //		String apiKey = Config.getApiKey();
 //		if(apiKey == null || apiKey.isBlank()) 
 //			throw new IllegalArgumentException("API key must not be blank");
 //		this.client = client;
 //	}
-	public String generateCodeFromStory(String userStory) throws IOException { 
+	public static String generateCodeFromStory(String userStory) throws IOException { 
 		if(userStory == null || userStory.isBlank()) { 
 			throw new IllegalArgumentException("userStory must not be blank");
 		}
+		initClientIfNeeded();
 		// Construct the system prompt
 		String systemPrompt = """
 			You are an expert Test Automation Engineer. Generate a clean, maintainable Selenium + TestNG test in Java.
@@ -62,5 +58,14 @@ public class OpenAIClientWrapper {
 		Path path = Path.of(fileName).toAbsolutePath();
 		Files.writeString(path, code, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 		LOGGER.info("Saved generated code to: " + path);
+	}
+	private static void initClientIfNeeded() { 
+		if(client == null) { 
+			String apiKey = Config.getApiKey();
+			if(apiKey == null || apiKey.isBlank()) 
+				throw new IllegalArgumentException("API key must not be blank");
+			client = OpenAIOkHttpClient.builder().apiKey(apiKey).build();
+			LOGGER.info("OpenAI client initialized.");
+		}
 	}
 }

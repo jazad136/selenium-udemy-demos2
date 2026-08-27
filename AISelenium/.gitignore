@@ -3,4 +3,4 @@
 .settings/
 .factorypath
 target/
-*.properties
+src/main/resources/config.properties

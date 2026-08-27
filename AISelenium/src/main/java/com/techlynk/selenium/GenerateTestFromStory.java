@@ -15,7 +15,7 @@ public class GenerateTestFromStory {
 				""";
 		try { 
 			System.out.println("Sending user story to AI...");
-			String generatedCode = new OpenAIClientWrapper().generateCodeFromStory(userStory);
+			String generatedCode = OpenAIClientWrapper.generateCodeFromStory(userStory);
 			System.out.println("\nAI Generated Test Code:\n");
 			System.out.println(generatedCode);
 		} catch(Exception e) { 
