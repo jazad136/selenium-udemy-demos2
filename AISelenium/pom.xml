@@ -5,7 +5,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>selenium-test-generation</name>
 	<description>Selenium Test Generation</description>
-  
+  	<properties>
+  	<maven.compiler.release>17</maven.compiler.release>
+  	</properties>
 	<dependencies>
         <dependency>
             <groupId>org.testng</groupId>
