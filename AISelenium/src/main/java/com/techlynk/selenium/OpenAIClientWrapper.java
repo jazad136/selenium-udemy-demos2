@@ -3,6 +3,7 @@ package com.techlynk.selenium;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.logging.Logger;
 
@@ -48,7 +49,7 @@ public class OpenAIClientWrapper {
 		);
 		return code.trim();
 	}
-	public void saveToFile(String code, String fileName) throws IOException { 
+	public static void saveToFile(String code, String fileName) throws IOException { 
 		if(code == null || code.isBlank()) { 
 			throw new IllegalArgumentException("code must not be blank.");
 		}
@@ -56,6 +57,9 @@ public class OpenAIClientWrapper {
 			throw new IllegalArgumentException("fileName must not be blank.");
 		}
 		Path path = Path.of(fileName).toAbsolutePath();
+		if(Files.notExists(path.getParent())) { 
+			path.toFile().getParentFile().mkdirs();
+		}
 		Files.writeString(path, code, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 		LOGGER.info("Saved generated code to: " + path);
 	}
