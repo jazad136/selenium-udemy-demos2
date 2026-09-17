@@ -1,3 +1,7 @@
+.classpath
+.factorypath
+.project
+.settings/
 **/Screenshots/*
 doesnotcompile/
 spark/
