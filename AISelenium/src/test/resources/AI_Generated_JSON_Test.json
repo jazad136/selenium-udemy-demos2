@@ -1,0 +1,191 @@
+[
+  {
+    "testCaseName": "Login - Valid Credentials - Verify Dashboard Visibility",
+    "description": "Registered user logs in with valid credentials and verifies successful login by checking dashboard visibility.",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "action": "Navigate",
+        "target": "https://opensource-demo.orangehrmlive.com/",
+        "expected": [
+          "Login page loads successfully",
+          "Login form is visible"
+        ]
+      },
+      {
+        "stepNumber": 2,
+        "action": "Verify",
+        "target": "Page Title",
+        "expected": [
+          "Title equals 'OrangeHRM'"
+        ]
+      },
+      {
+        "stepNumber": 3,
+        "action": "Enter text",
+        "target": "Username field",
+        "inputValues": {
+          "value": "Admin"
+        },
+        "expected": [
+          "Username value is entered"
+        ]
+      },
+      {
+        "stepNumber": 4,
+        "action": "Enter text",
+        "target": "Password field",
+        "inputValues": {
+          "value": "admin123"
+        },
+        "expected": [
+          "Password value is entered"
+        ]
+      },
+      {
+        "stepNumber": 5,
+        "action": "Click",
+        "target": "Login button",
+        "expected": [
+          "Login submission is triggered"
+        ]
+      },
+      {
+        "stepNumber": 6,
+        "action": "Verify",
+        "target": "Dashboard page",
+        "expected": [
+          "Dashboard header/text 'Dashboard' is visible",
+          "URL contains '/dashboard' (or user is redirected to dashboard)",
+          "Left navigation menu is visible"
+        ]
+      }
+    ]
+  },
+  {
+    "testCaseName": "Login - Valid Credentials - Verify by Page Title and User Menu",
+    "description": "Registered user logs in with valid credentials and verifies successful login using page title and presence of user menu.",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "action": "Navigate",
+        "target": "https://opensource-demo.orangehrmlive.com/",
+        "expected": [
+          "Login page loads successfully",
+          "Login form is visible"
+        ]
+      },
+      {
+        "stepNumber": 2,
+        "action": "Verify",
+        "target": "Page Title",
+        "expected": [
+          "Title equals 'OrangeHRM'"
+        ]
+      },
+      {
+        "stepNumber": 3,
+        "action": "Enter text",
+        "target": "Username field",
+        "inputValues": {
+          "value": "Admin"
+        },
+        "expected": [
+          "Username value is entered"
+        ]
+      },
+      {
+        "stepNumber": 4,
+        "action": "Enter text",
+        "target": "Password field",
+        "inputValues": {
+          "value": "admin123"
+        },
+        "expected": [
+          "Password value is entered"
+        ]
+      },
+      {
+        "stepNumber": 5,
+        "action": "Click",
+        "target": "Login button",
+        "expected": [
+          "Login submission is triggered"
+        ]
+      },
+      {
+        "stepNumber": 6,
+        "action": "Verify",
+        "target": "Post-login state",
+        "expected": [
+          "Page title equals 'OrangeHRM'",
+          "User menu/profile dropdown is visible in the top bar",
+          "Breadcrumb or header indicates 'Dashboard'"
+        ]
+      }
+    ]
+  },
+  {
+    "testCaseName": "Login - Invalid Password - Error Handling",
+    "description": "Registered user attempts login with invalid password and remains on login page with an appropriate error message.",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "action": "Navigate",
+        "target": "https://opensource-demo.orangehrmlive.com/",
+        "expected": [
+          "Login page loads successfully",
+          "Login form is visible"
+        ]
+      },
+      {
+        "stepNumber": 2,
+        "action": "Verify",
+        "target": "Page Title",
+        "expected": [
+          "Title equals 'OrangeHRM'"
+        ]
+      },
+      {
+        "stepNumber": 3,
+        "action": "Enter text",
+        "target": "Username field",
+        "inputValues": {
+          "value": "Admin"
+        },
+        "expected": [
+          "Username value is entered"
+        ]
+      },
+      {
+        "stepNumber": 4,
+        "action": "Enter text",
+        "target": "Password field",
+        "inputValues": {
+          "value": "WrongPass123!"
+        },
+        "expected": [
+          "Password value is entered"
+        ]
+      },
+      {
+        "stepNumber": 5,
+        "action": "Click",
+        "target": "Login button",
+        "expected": [
+          "Login submission is triggered"
+        ]
+      },
+      {
+        "stepNumber": 6,
+        "action": "Verify",
+        "target": "Error message",
+        "expected": [
+          "Error message 'Invalid credentials' is displayed",
+          "User remains on login page (URL does not navigate to '/dashboard')",
+          "Dashboard header is not visible"
+        ]
+      }
+    ]
+  }
+]
