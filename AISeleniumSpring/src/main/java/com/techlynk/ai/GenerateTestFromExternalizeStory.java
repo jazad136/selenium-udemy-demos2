@@ -15,7 +15,8 @@ public class GenerateTestFromExternalizeStory implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		reader.readFromClasspath("user-story.txt");
+		String output = reader.readFromClasspath("user-story.txt");
+		System.out.println(output);
 	}
 }
 
