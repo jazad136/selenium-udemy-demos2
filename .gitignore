@@ -1,2 +1,8 @@
+SeleniumDemoProject/.factorypath
+SeleniumDemoProject/.classpath
+SeleniumDemoProject/.project
+SeleniumDemoProject/.settings/
+
+
 SeleniumDemoProject/src/test/resources/Screenshots/
 *.zip
