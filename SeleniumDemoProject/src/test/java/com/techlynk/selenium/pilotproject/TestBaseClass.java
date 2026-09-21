@@ -22,6 +22,40 @@ import org.testng.annotations.AfterMethod;
 public class TestBaseClass {
     protected WebDriver driver = null;
     protected Properties prop = null;
+    
+    public void datePickerFromSlidingCalendar(String suppliedDate) { 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try { 
+            Date dateYear = dateFormat.parse(suppliedDate);
+            Date currentDate = new Date();
+            driver.findElement(By.id(prop.getProperty("calendarPreferDate1_id"))).click();
+            String year = new SimpleDateFormat("yyyy").format(dateYear);
+            String month = new SimpleDateFormat("MMMM").format(dateYear);
+            
+            String appDate = month + " " + year;
+            System.out.println("Supplied Calendar Month and Year : " + appDate);
+            
+            String monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            System.err.println("Getting Calendar Month and Year : " + monthYearDisplayed);
+            
+            while(!appDate.equals(monthYearDisplayed)) { 
+                if(dateYear.compareTo(currentDate) == 1)  
+                    driver.findElement(By.xpath(prop.getProperty("backwardCalendarClick_xpath"))).click();
+                else if(dateYear.compareTo(currentDate) == -1) 
+                    driver.findElement(By.xpath(prop.getProperty("forwardCalendarClick_xpath"))).click();     
+                monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            }
+        
+            // Select Day
+            String day = new SimpleDateFormat("d").format(dateYear);
+            System.err.println("Supplied Date Day : " + day);
+            WebElement calendarDay = driver.findElement(By.xpath("//a[text()='"+day+"']"));
+            calendarDay.click();
+        } 
+        catch(ParseException e) { 
+            e.printStackTrace();
+        }
+    }
     public void datePickerFromDropDownCalendar(String suppliedDate) { 
         SimpleDateFormat datFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -50,6 +84,7 @@ public class TestBaseClass {
             e.printStackTrace();
         }
     }
+    
     public static void selectFromDropDown(WebElement element, String selectable) { 
         Select dropdown = new Select(element);
         dropdown.selectByVisibleText(selectable);
