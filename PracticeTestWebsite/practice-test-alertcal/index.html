@@ -9,7 +9,8 @@
 	<!-- This site is optimized with the Yoast SEO plugin v28.2 - https://yoast.com/product/yoast-seo-wordpress/ -->
 	<title>Test Alerts | Practice Test Automation</title>
     <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="canonical" href="https://practicetestautomation.com/practice-test-login/">
+	<link href="jquery-ui-1.14.2/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="canonical" href="https://practicetestautomation.com/practice-test-login/">
 	<meta property="og:locale" content="en_US">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="Test Alerts | Practice Test Automation">
@@ -259,7 +260,7 @@
 							</div>
 							<div id="menu-primary-container" class="menu-primary-container">
 								<div id="menu-primary" class="menu-container menu-primary" role="navigation">
-    <nav class="menu"><ul id="menu-primary-items" class="menu-primary-items"><li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-43"><a href="https://practicetestautomation.com/">Home</a></li>
+<nav class="menu"><ul id="menu-primary-items" class="menu-primary-items"><li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-43"><a href="https://practicetestautomation.com/">Home</a></li>
 <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="https://practicetestautomation.com/practice/">Practice</a></li>
 <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21"><a href="https://practicetestautomation.com/courses/">Courses</a></li>
 <li id="menu-item-1082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1082"><a href="https://practicetestautomation.com/workshop">AI Workshop</a></li>
@@ -295,11 +296,49 @@
 									<section id="main-container" class="main-container" role="main">
 				
 <section id="login">
-	<h2 class="banner-class">Test Calendar</h2>
+	<h2 class="banner-class">Test Alerts</h2>
 	<ul>
 		<li>This is a simple page containing a calendar. </li>
 
 	</ul>
+    <div>
+        <h2>Here is an appointment scheduler</h2>
+        <div>
+            <label for="name1">Name</label>
+            <input style="width:10em;" type="text" placeholder="Name"/>
+        </div>
+        <div>
+            <label for="mobile1">Mobile</label>
+            <input style="width:10em;" type="text" placeholder="Mobile"/>
+        </div>
+        <h6>Registered with Sakra Radio Button</h6>
+        <label for="registered1">Registered with Sakra?</label>
+        <div class="form-check">
+            <label for="registered1-yes">Yes</label>
+            <input type="radio" id="registered1-no" name="registered1"/>
+        </div>
+        <div class="form-check">
+            <label for="registered1-no">No</label>
+            <input type="radio" id="registered1-no" name="registered1"/>
+        </div>
+        <h6>UHID Text Field</h6>
+        <div>
+            <label for="uhid1">Please enter UHID</label>
+            <input type="text" placeholder="Please enter UHID"/>
+        </div >
+        <div class="row align-items-start" >
+            <div class="col">
+                <h6>Preferred Date 1</h6>
+                <label for="prefDate1">Preferred Date 1</label>
+                <input type="text" placeholder="mm-dd-yyyy" class="datepicker form-control"/>
+            </div>
+            <div class="col">
+                <h6>Preferred Date 2</h6>
+                <label for="prefDate2">Preferred Date 2</label>
+                <input type="text" placeholder="mm-dd-yyyy" class="datepicker form-control"/>
+            </div>
+        </div>
+    </div>
 	<div> 
         <h2 style="text-align: center">Here is a calendar</h2>
     </div>
@@ -341,99 +380,52 @@
 			</div>
 		</div>
 	</div>
-	<button onclick="showAlert()" id="submit" class="btn">Submit</button>
-	
-	<div id="error">Your username is invalid!</div>
-	<hr class="wp-block-separator">
-		<h5>Test case 1: Positive LogIn test</h5>
-		<ol>
-			<li>Open page</li>
-			<li>Type username <b>student</b> into Username field</li>
-			<li>Type password <b>Password123</b> into Password field</li>
-			<li>Push <b>Submit</b> button</li>
-			<li>Verify new page URL contains <b>practicetestautomation.com/logged-in-successfully/</b></li>
-			<!-- <li>Verify new page contains text 'Congratulations student. You successfully logged in!'</li> -->
-			<li>Verify new page contains expected text ('Congratulations' or 'successfully logged in')</li>
-			<li>Verify button <b>Log out</b> is displayed on the new page</li>
-		</ol>
-		<hr class="wp-block-separator">
-		<h5>Test case 2: Negative username test</h5>
-		<ol>
-			<li>Open page</li>
-			<li>Type username <b>incorrectUser</b> into Username field</li>
-			<li>Type password <b>Password123</b> into Password field</li>
-			<li>Push <b>Submit</b> button</li>
-			<li>Verify error message is displayed</li>
-			<li>Verify error message text is <b>Your username is invalid!</b></li>
-		</ol>
-		<hr class="wp-block-separator">
-		<h5>Test case 3: Negative password test</h5>
-		<ol>
-			<li>Open page</li>
-			<li>Type username <b>student</b> into Username field</li>
-			<li>Type password <b>incorrectPassword</b> into Password field</li>
-			<li>Push <b>Submit</b> button</li>
-			<li>Verify error message is displayed</li>
-			<li>Verify error message text is <b>Your password is invalid!</b></li>
-		</ol>
-	</section>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const username = document.querySelector("#username"),
-				password = document.querySelector("#password"),
-				submit = document.querySelector("#submit"),
-				error = document.querySelector("#error");
+	<h2 style="text-align: center">Here is another calendar</h2>
+    <div class="container">
+    <div class="calendar-container">
+        <!-- Calendar Header Navigation -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 id="monthYearTitle2" class="mb-0 fw-bold text-dark"></h2>
+            <div class="btn-group">
+                <button id="prevMonthBtn2" class="btn btn-outline-secondary">
+                    <i class="bi bi-chevron-left"></i> Prev
+                </button>
+                <button id="todayBtn2" class="btn btn-outline-primary">Today</button>
+                <button id="nextMonthBtn2" class="btn btn-outline-secondary">
+                    Next <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
 
-			submit.addEventListener("click", function () {
-				let us_name = username.value,
-					us_pass = password.value;
-
-				if(us_name == "student" && us_pass == "Password123"){
-					window.location.href = "https://practicetestautomation.com/logged-in-successfully";
-				}else if(us_name == "student" && us_pass != "Password123"){
-					error.innerHTML = "Your password is invalid!";
-					error.classList.add("show");
-					username.value = "";
-					password.value = "";
-				}else{
-					error.innerHTML = "Your username is invalid!";
-					error.classList.add("show");
-					username.value = "";
-					password.value = "";
-				}
-			})
-		})
-	</script>
-
-</section> <!-- .main-container -->
-
-<footer id="site-footer" class="site-footer" role="contentinfo">
-        <div class="design-credit">
-        <span>
-            © Copyright 2020  <a href="../practice-test-index/index.html">Jonathan Saddler.</a>  All rights reserved  |  <a href="https://practicetestautomation.com/privacy-policy/">Privacy Policy</a>        </span>
+        <!-- Calendar Grid -->
+        <div class="table-responsive">
+            <table class="table table-bordered calendar-table m-0">
+                <thead>
+                    <tr>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody id="calendarBody2">
+                    <!-- Days will be injected dynamically via jQuery -->
+                </tbody>
+            </table>
+        </div>
     </div>
-</footer>
-</div><!-- .max-width -->
-</div><!-- .overflow-container -->
-
-
-<script type="speculationrules">
-{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/modern-store-modified/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
-</script>
-<script id="ct-modern-store-js-js" src="./index_files/production.min.js"></script>
-<script data-wp-strategy="defer" defer="" fetchpriority="low" id="jetpack-stats-js" src="./index_files/e-202632.js.download"></script>
-<script type="text/javascript">
-	function showAlert() { 
-		alert("Close this window")
-	}
-</script>
+</div>
 <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-
-
+<script id="jquery-core-js" src="./jquery-4.0.0/jquery4_0_0.min.js"></script>
+<script id="jquery-ui-js" src="./jquery-ui-1.14.2/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function() {
     // Current date tracking state
     let currentDate = new Date();
+    let currentDate2 = new Date();
     
     // Sample dummy events object keyed by date string (YYYY-MM-DD)
     const sampleEvents = {
@@ -444,6 +436,18 @@ $(document).ready(function() {
             { title: "Team Lunch", class: "bg-warning-subtle text-warning-emphasis" },
             { title: "Design Sync", class: "bg-info-subtle text-info-emphasis" }
         ]
+        ,['2026-09-16']:[{title: 'Team Dinner', class: 'bg-success-subtle text-success'}]
+        ,['2026-10-16']:[{title: 'Jonathan Saddler', class: 'bg-success-subtle text-success'}]
+    };
+    const sampleEvents2 = {
+        [`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-15`]: [
+            { title: "Project Review", class: "bg-success-subtle text-success" }
+        ],
+        [`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-20`]: [
+            { title: "Team Lunch", class: "bg-warning-subtle text-warning-emphasis" },
+            { title: "Design Sync", class: "bg-info-subtle text-info-emphasis" }
+        ]
+        ,['2026-09-16']:[{title: 'Team Dinner', class: 'bg-success-subtle text-success'}]
     };
 
     function renderCalendar(date) {
@@ -518,8 +522,80 @@ $(document).ready(function() {
 
         $("#calendarBody").html(htmlRows);
     }
+    function renderCalendar2(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
 
-    // Navigation Handlers
+        // Array of month names
+        const monthNames = ["January", "February", "March", "April", "May", "June", 
+                            "July", "August", "September", "October", "November", "December"];
+        
+        // Set Header Title
+        $("#monthYearTitle2").text(`${monthNames[month]} ${year}`);
+
+        // Get first day of the month and total days in the month
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        
+        // Days in previous month to fill the starting blank gaps
+        const prevTotalDays = new Date(year, month, 0).getDate();
+
+        let htmlRows = "";
+        let dayCounter = 1;
+        let nextMonthDayCounter = 1;
+
+        // Today's date components for checking
+        const today = new Date();
+
+        // 6 rows max coverage for any given month calendar grid
+        for (let i = 0; i < 6; i++) {
+            let rowCells = "<tr>";
+
+            for (let j = 0; j < 7; j++) {
+                const cellIndex = i * 7 + j;
+
+                if (cellIndex < firstDayIndex) {
+                    // Days from the previous month
+                    const prevDay = prevTotalDays - firstDayIndex + cellIndex + 1;
+                    rowCells += `<td class="other-month"><span class="day-number">${prevDay}</span></td>`;
+                } else if (dayCounter > totalDays) {
+                    // Days from the next month
+                    rowCells += `<td class="other-month"><span class="day-number">${nextMonthDayCounter}</span></td>`;
+                    nextMonthDayCounter++;
+                } else {
+                    // Current month days
+                    let dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayCounter).padStart(2, '0')}`;
+                    let isToday = today.getDate() === dayCounter && today.getMonth() === month && today.getFullYear() === year ? "today" : "";
+                    
+                    rowCells += `<td class="${isToday}" data-date="${dateString}">`;
+                    rowCells += `<span class="day-number">${dayCounter}</span>`;
+
+                    // Inject events if they match this specific calendar day
+                    if (sampleEvents2[dateString]) {
+                        sampleEvents2[dateString].forEach(event => {
+                            rowCells += `<div class="event-badge ${event.class}">${event.title}</div>`;
+                        });
+                    }
+
+                    rowCells += `</td>`;
+                    dayCounter++;
+                }
+            }
+
+            rowCells += "</tr>";
+            htmlRows += rowCells;
+
+            // Break loop early if all days of the month are fully printed
+            if (dayCounter > totalDays && nextMonthDayCounter > 1) {
+                // Ensure we finish rendering the remainder of the current row grid line
+                break;
+            }
+        }
+
+        $("#calendarBody2").html(htmlRows);
+    }
+
+    // Navigation Cal 1 Handlers
     $("#prevMonthBtn").click(function() {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar(currentDate);
@@ -530,9 +606,24 @@ $(document).ready(function() {
         renderCalendar(currentDate);
     });
 
-    $("#todayBtn").click(function() {
-        currentDate = new Date();
-        renderCalendar(currentDate);
+    $("#todayBtn2").click(function() {
+        currentDate2 = new Date();
+        renderCalendar2(currentDate2);
+    });
+    // Navigation Cal 2 Handlers
+    $("#prevMonthBtn2").click(function() {
+        currentDate2.setMonth(currentDate2.getMonth() - 1);
+        renderCalendar2(currentDate2);
+    });
+
+    $("#nextMonthBtn2").click(function() {
+        currentDate2.setMonth(currentDate2.getMonth() + 1);
+        renderCalendar2(currentDate2);
+    });
+
+    $("#todayBtn2").click(function() {
+        currentDate2 = new Date();
+        renderCalendar2(currentDate2);
     });
 
     // Handle day click activity
@@ -543,6 +634,12 @@ $(document).ready(function() {
 
     // Initial Trigger
     renderCalendar(currentDate);
+    renderCalendar2(currentDate2);
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+    });
 });
 </script>
-<img src="./index_files/g.gif" alt="" width="6" height="5" id="wpstats"></body></html>
+</body>

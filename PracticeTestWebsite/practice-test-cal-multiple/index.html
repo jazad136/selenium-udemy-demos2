@@ -1,7 +1,141 @@
 <html>
 <head>
-<title>Test Alerts | Practice Test Automation</title>
-<link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Test Calendars | Practice Test Automation</title>
+<link rel="stylesheet" id="ct-modern-store-google-fonts-css" href="./css/index.css" media="all">
+<link rel="stylesheet" id="ct-modern-store-font-awesome-css" href="./css/all.min.css" media="all">
+<link rel="stylesheet" id="ct-modern-store-style-css" href="./css/style.css" media="all">
+<link rel="stylesheet" id="wp-block-paragraph-css" href="./css/style.min.css" media="all">
+<link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="jquery-ui-1.14.2/jquery-ui.min.css" rel="stylesheet" type="text/css">
+<link rel="https://api.w.org/" href="https://practicetestautomation.com/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://practicetestautomation.com/wp-json/wp/v2/pages/251"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://practicetestautomation.com/xmlrpc.php?rsd">
+
+<style id="wp-custom-css">
+	#xpath-table{max-width:960px;margin:0 auto;padding:0;}
+#courses_table{width:100%;}
+
+.controls{margin:12px 0 8px;}
+.controls-title{margin:0 0 10px;}
+
+.filter-columns{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+
+.filter-group{
+  border:1px solid #D9D9D9;
+  border-radius:10px;
+  padding:10px 12px;
+  background:#fff;
+}
+.filter-group legend{font-weight:700;padding:0 6px;}
+
+.filter-group.vertical label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:6px 0;
+}
+.filter-group.vertical input{margin:0;}
+
+.block-label{display:block;font-weight:700;margin-bottom:6px;}
+
+#xpath-table .dropdown{position:relative;max-width:260px;}
+#xpath-table .dropdown-button{
+  display:block;width:100%;text-align:left;
+  color:#1A1A1A;background:#fff;border:1px solid #ccc;border-radius:6px;
+  padding:8px 14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;
+}
+#xpath-table .dropdown-button:hover{border-color:#FFC270;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+#xpath-table .dropdown.open .dropdown-button,
+#xpath-table .dropdown-button:focus{outline:none;border-color:#FFC270;box-shadow:0 0 0 3px rgba(255,194,112,.3);}
+#xpath-table .dropdown-menu{
+  position:absolute;top:calc(100% + 6px);left:0;min-width:100%;
+  background:#fff;border:1px solid #ddd;border-radius:8px;padding:6px 0;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);list-style:none;margin:0;display:none;z-index:10;
+}
+#xpath-table .dropdown.open .dropdown-menu{display:block;}
+#xpath-table .dropdown-menu li{padding:8px 12px;cursor:pointer;}
+#xpath-table .dropdown-menu li[aria-selected="true"]{font-weight:700;}
+#xpath-table .dropdown-menu li:hover{background:#F5F5F5;}
+
+/* force the separator to take a full row regardless of parent layout */
+.controls-sep{
+  height:1px;
+  background:#EEE;
+  margin:16px 0 0;
+  display:block;
+  width:100%;
+  clear:both;          /* break floats */
+  grid-column:1 / -1;  /* if inside any grid */
+  flex-basis:100%;     /* if inside any flex */
+}
+
+/* put Sort row on its own full row below the line */
+.sort-row{
+  display:flex; 
+  align-items:center; 
+  gap:10px;
+  padding-top:12px;
+  width:100%;
+  grid-column:1 / -1;  /* if parent is grid */
+  flex-basis:100%;     /* if parent is flex */
+}
+.sort-row label{ font-weight:700; }
+
+
+
+.sort-row select {
+  width: 220px;         /* optional: control width */
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.sort-row select:hover {
+  border-color: #FFC270;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+.sort-row select:focus {
+  outline: none;
+  border-color: #FFC270;
+  box-shadow: 0 0 0 3px rgba(255,194,112,.3);
+}
+
+
+.no-data{padding:10px 12px;border:1px solid #E6E6E6;border-radius:8px;background:#FFF7E8;}
+
+.controls-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reset-row {
+  margin: 0;
+}
+
+#resetFilters {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+}
+
+#resetFilters:hover {
+  background: #e9e9e9;
+}
+#resetFilters {
+  display: none;
+}
+</style>
 <style>
     .calendar-container {
         max-width: 800px;
@@ -57,8 +191,89 @@
         white-space: nowrap;
     }
 </style>
+<style>
+    
+</style>
 </head>
-<body>
+<body id="modern-store-modified" class="wp-singular page-template page-template-simple_login page-template-simple_login-php page page-id-251 wp-custom-logo wp-theme-modern-store-modified full-post">
+			<a class="skip-content" href="https://practicetestautomation.com/practice-test-login/#main-container">Press "Enter" to skip to content</a>
+	<div id="overflow-container" class="overflow-container">
+		<div id="max-width" class="max-width">
+						<header class="site-header" id="site-header" role="banner">
+				<div class="header-top">
+					<div id="menu-secondary-container" class="menu-secondary-container">
+						<div id="menu-secondary" class="menu-container menu-secondary" role="navigation">
+    </div>
+					</div>
+					<div id="social-icons-container" class="social-icons-container">
+											</div>
+				</div>
+				<div class="header-middle">
+					<div id="title-container" class="title-container">
+						<div id="site-title" class="site-title"><a href="https://practicetestautomation.com/" class="custom-logo-link" rel="home"><img width="305" height="96" src="./index_files/Logo-1.png" class="custom-logo" alt="Practice Test Automation" decoding="async" srcset="https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/Logo-1.png?w=305&amp;ssl=1 305w, https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/Logo-1.png?resize=300%2C94&amp;ssl=1 300w" sizes="(max-width: 305px) 100vw, 305px"></a></div>											</div>
+									</div>
+				<div class="header-bottom">
+					<div id="mobile-menu-container" class="mobile-menu-container">
+						<div id="mobile-menu-container-inner">
+							<div id="close-mobile-menu" class="close-mobile-menu">
+								<button>
+									<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<g transform="translate(-174.000000, -18.000000)" fill="#FFFFFF">
+												<g transform="translate(174.000000, 18.000000)">
+														<rect transform="translate(14.000000, 14.000000) rotate(-45.000000) translate(-14.000000, -14.000000) " x="-4" y="13" width="36" height="2"></rect>
+														<rect transform="translate(14.000000, 14.000000) rotate(45.000000) translate(-14.000000, -14.000000) " x="-4" y="13" width="36" height="2"></rect>
+												</g>
+										</g>
+								</g>
+						</svg>								</button>
+							</div>
+							<div id="menu-primary-container" class="menu-primary-container">
+								<div id="menu-primary" class="menu-container menu-primary" role="navigation">
+<nav class="menu"><ul id="menu-primary-items" class="menu-primary-items"><li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-43"><a href="https://practicetestautomation.com/">Home</a></li>
+<li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="https://practicetestautomation.com/practice/">Practice</a></li>
+<li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21"><a href="https://practicetestautomation.com/courses/">Courses</a></li>
+<li id="menu-item-1082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1082"><a href="https://practicetestautomation.com/workshop">AI Workshop</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19"><a href="https://practicetestautomation.com/blog/">Blog</a></li>
+<li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18"><a href="https://practicetestautomation.com/contact/">Contact</a></li>
+</ul></nav></div>
+							</div>
+						</div>
+					</div>
+					<div id="toggle-container" class="toggle-container">
+						<button id="toggle-navigation" class="toggle-navigation" name="toggle-navigation" aria-expanded="false">
+							<span class="screen-reader-text">open menu</span>
+							<svg width="36px" height="24px" viewBox="0 0 36 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<g transform="translate(-198.000000, -90.000000)" fill="#FFFFFF">
+												<g transform="translate(0.000000, 18.000000)">
+														<g transform="translate(0.000000, 60.000000)">
+																<g transform="translate(141.000000, 12.000000)">
+																		<g transform="translate(57.000000, 0.000000)">
+																				<rect x="0" y="22" width="36" height="2"></rect>
+																				<rect x="0" y="11" width="36" height="2"></rect>
+																				<rect x="0" y="0" width="36" height="2"></rect>
+																		</g>
+																</g>
+														</g>
+												</g>
+										</g>
+								</g>
+						</svg>						</button>
+					</div>
+				</div>
+			</header>
+									<section id="main-container" class="main-container" role="main">
+				
+<section id="login">
+	<h2 style="text-align: center;" class="banner-class">Test Calendars</h2>
+    <div>
+        <h3 style="text-align: center;">Here is a date picker</h3>
+        <form>
+            <label style="width: 10em" for="date1">Start Date</label>
+            <input placeholder="yyyy-mm-dd" style="width: 10em" id="date1" class="form-control datepicker"/>
+        </form>
+    </div>
 <h2 style="text-align: center">Here is a calendar</h2>
     <div class="container">
     <div class="calendar-container">
@@ -95,6 +310,13 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <form>
+        <label style="width: 10em" for="date2">Second Date</label>
+        <input style="width: 10em" id="date2" class="form-control datepicker"/>
+    </form>
+    <h3 style="text-align: center;">Above is a second date picker</h3>
     
     <h2 style="text-align: center">Here is another calendar</h2>
     <div class="container">
@@ -136,6 +358,7 @@
 </div>
 <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 <script id="jquery-core-js" src="./jquery-4.0.0/jquery4_0_0.min.js"></script>
+<script id="jquery-ui-js" src="./jquery-ui-1.14.2/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function() {
     // Current date tracking state
@@ -236,6 +459,12 @@ $(document).ready(function() {
         }
 
         $("#calendarBody").html(htmlRows);
+        
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
     }
     function renderCalendar2(date) {
         const year = date.getFullYear();
@@ -346,6 +575,8 @@ $(document).ready(function() {
         let selectedDate = $(this).data("date");
         alert("You clicked on date: " + selectedDate);
     });
+
+    
 
     // Initial Trigger
     renderCalendar(currentDate);
