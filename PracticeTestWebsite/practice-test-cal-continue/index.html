@@ -290,7 +290,7 @@
                         <li><a class="dropdown-item">Dr.  </a></li>
                     </ul>
                 </div> -->
-                <select id="selTitle">
+                <select id="selTitle" class="form-dropdown">
                     <option>Mr.</option>
                     <option>Ms.</option>
                     <option>Mast.</option>
@@ -355,7 +355,7 @@
             </div>
             <div class="row align-items-start" >
                 <div class="col">
-                    <select id="selCountry">
+                    <select id="selCountry" class="form-dropdown">
                         <option>United States</option>
                         <option>Bangalore</option>
                         <option>Bangladesh</option>
@@ -364,7 +364,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select id="selState">
+                    <select id="selState" class="form-dropdown">
                         <option>OH</option>
                         <option>AK</option>
                         <option>AZ</option>
@@ -374,7 +374,13 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="City"/>
+                    <select id="selCity" class="form-dropdown">
+                        <option>Cincinnati</option>
+                        <option>Akron</option>
+                        <option>Blue Ash</option>
+                        <option>Fairfield</option>
+                        <option>Hamilton</option>
+                    </select>
                 </div>
                 <div class="col">
                     <input type="text" placeholder="PIN Code"/>
@@ -383,6 +389,14 @@
         </section>
     </form>
 </section>
+</div>
+<hr style="height:200px"/>
+<footer id="site-footer" class="site-footer" role="contentinfo">
+        <div class="design-credit">
+        <span>
+            © Copyright 2020  <a href="#">Jonathan Saddler.</a> </span>
+    </div>
+</footer>
 <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 <script id="jquery-core-js" src="./jquery-4.0.0/jquery4_0_0.min.js"></script>
 <script id="jquery-ui-js" src="./jquery-ui-1.14.2/jquery-ui.min.js"></script>
@@ -605,9 +619,7 @@ $(document).ready(function() {
         showButtonPanel: true,
         dateFormat: "yy-mm-dd"
     });
-    $( "#selTitle" ).selectmenu();
-    $( "#selCountry" ).selectmenu();
-    $( "#selState" ).selectmenu();
+    $( ".form-dropdown" ).selectmenu();
     $( "#chkNa" ).checkboxradio();
     // Initial Trigger
     renderCalendar(currentDate);
