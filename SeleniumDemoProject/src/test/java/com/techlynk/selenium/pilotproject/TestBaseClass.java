@@ -5,16 +5,23 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -28,6 +35,10 @@ public class TestBaseClass {
 //    protected String propsFilename = "src/main/resources/sakrahospital_bookAppointment.properties";
     protected String propsFilename = "src/main/resources/practicetestwebsite.properties";
     
+    public void dismissAlert() { 
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
+    }
     /**
      * 
      * @param displayDate
@@ -157,5 +168,78 @@ public class TestBaseClass {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    public void selectAppointmentDate() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+
+//        String displayDate = driver.findElement(By.className(prop.getProperty("displayDate_class"))).getText();
+        driver.get("file:///C:/Users/JonathanSaddler/Code/tryout/java/selenium-example2/PracticeTestWebsite/practice-test-alertcal/index.html");
+        String displayDate = driver.findElement(By.id(prop.getProperty("displayDate_id"))).getText();
+        System.err.println("Display Date : " + displayDate);
+        WebElement nextButton = driver.findElement(By.xpath(prop.getProperty("nextWeek_xpath")));
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(nextButton);
+        new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 200);
+
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(prop.getProperty("nextWeek_xpath"))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("nextWeek_xpath"))));
+
+        // get other month: //*[@class='other-month'] 
+        // get all days: allDates_xpath
+        // Add 2 months ahead date in displayDate
+        String appointmentDay = addInDisplayDate(displayDate);
+        // maybe advance the date
+        boolean isDateSelected = false;
+        List<WebElement> allDates = driver.findElements(By.xpath(prop.getProperty("allDates_xpath")));
+        for (WebElement date : allDates) {
+            System.out.println(date.getText());
+            if (date.getText().equals(appointmentDay)) {
+                date.click();
+                isDateSelected = true;
+            } else {
+                System.err.println("New Date is not available in existing Date Calendar");
+            }
+        }
+        if (!isDateSelected) {
+            // click the next button twice
+            // next week xpath: //*[@id='nextMonthBtn']
+            
+            nextButton.click();
+            wait(2);
+            nextButton.click();
+            wait(2);
+            List<WebElement> allNewDates = driver.findElements(By.xpath(prop.getProperty("allDates_xpath")));
+            for (WebElement date : allNewDates) {
+                if (date.getText().equals(appointmentDay)) {
+                    date.click();
+                }
+            }
+        }
+    }
+    
+    public String addInDisplayDate(String displayDate) { 
+//                                                     3 letters of date
+//                                                              day     
+//                                                           3 letters of month
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy");
+        String newDate = null;
+        try{
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateFormat.parse(displayDate));
+            // Add 4 days
+            calendar.add(Calendar.MONTH, 2);
+            SimpleDateFormat dateFormatNew = new SimpleDateFormat("d");
+            newDate = dateFormat.format(calendar.getTime());
+            System.out.println("New Date : " + newDate);
+        } 
+        catch(ParseException e) {
+            e.printStackTrace(); 
+        }
+        return newDate;
+    }
+
+    public void selectValueFromDropdown(WebElement element, String nameTitle) {
+        Select title = new Select(element);
+        title.selectByVisibleText(nameTitle);
     }
 }
