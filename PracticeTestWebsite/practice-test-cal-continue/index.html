@@ -10,7 +10,7 @@
 <link rel="https://api.w.org/" href="https://practicetestautomation.com/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://practicetestautomation.com/wp-json/wp/v2/pages/251"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://practicetestautomation.com/xmlrpc.php?rsd">
 
 <style id="wp-custom-css">
-	#xpath-table{max-width:960px;margin:0 auto;padding:0;}
+#xpath-table{max-width:960px;margin:0 auto;padding:0;}
 #courses_table{width:100%;}
 
 .controls{margin:12px 0 8px;}
@@ -190,6 +190,11 @@
         overflow: hidden;
         white-space: nowrap;
     }
+    #scheduler { 
+        margin-left: 20px;
+        width: 100%;
+        font-size: .7em;
+    }
 </style>
 <style>
     
@@ -265,97 +270,133 @@
 			</header>
 									<section id="main-container" class="main-container" role="main">
 				
-<section id="login">
+<section id="scheduler">
 	<h2 style="text-align: center;" class="banner-class">Test Calendars</h2>
-    <div>
-        <h3 style="text-align: center;">Here is a date picker</h3>
-        <form>
-            <label style="width: 10em" for="date1">Start Date</label>
-            <input placeholder="yyyy-mm-dd" style="width: 10em" id="date1" class="form-control datepicker"/>
-        </form>
-    </div>
-<h2 style="text-align: center">Here is a calendar</h2>
-    <div class="container">
-    <div class="calendar-container">
-        <!-- Calendar Header Navigation -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="monthYearTitle" class="mb-0 fw-bold text-dark"></h2>
-            <div class="btn-group">
-                <button id="prevMonthBtn" class="btn btn-outline-secondary">
-                    <i class="bi bi-chevron-left"></i> Prev
-                </button>
-                <button id="todayBtn" class="btn btn-outline-primary">Today</button>
-                <button id="nextMonthBtn" class="btn btn-outline-secondary">
-                    Next <i class="bi bi-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Calendar Grid -->
-        <div class="table-responsive">
-            <table class="table table-bordered calendar-table m-0">
-                <thead>
-                    <tr>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                    </tr>
-                </thead>
-                <tbody id="calendarBody">
-                    <!-- Days will be injected dynamically via jQuery -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+    <h2 style="text-align: center">Here is an appointment scheduler</h2>
     <form>
-        <label style="width: 10em" for="date2">Second Date</label>
-        <input style="width: 10em" id="date2" class="form-control datepicker"/>
-    </form>
-    <h3 style="text-align: center;">Above is a second date picker</h3>
-    
-    <h2 style="text-align: center">Here is another calendar</h2>
-    <div class="container">
-    <div class="calendar-container">
-        <!-- Calendar Header Navigation -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="monthYearTitle2" class="mb-0 fw-bold text-dark"></h2>
-            <div class="btn-group">
-                <button id="prevMonthBtn2" class="btn btn-outline-secondary">
-                    <i class="bi bi-chevron-left"></i> Prev
-                </button>
-                <button id="todayBtn2" class="btn btn-outline-primary">Today</button>
-                <button id="nextMonthBtn2" class="btn btn-outline-secondary">
-                    Next <i class="bi bi-chevron-right"></i>
-                </button>
+        <section id="personalDetailsSection">
+            <h2 class="form-section-heading">Personal Details</h2>
+            <div class="row align-items-start">
+                <div class="col">
+                    <!-- <div class="dropdown" id="selTitle">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Title
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Mr.  </a></li>
+                        <li><a class="dropdown-item">Ms.  </a></li>
+                        <li><a class="dropdown-item">Mast.</a></li>
+                        <li><a class="dropdown-item">Baby </a></li>
+                        <li><a class="dropdown-item">Dr.  </a></li>
+                    </ul>
+                </div> -->
+                <select id="selTitle" class="form-dropdown">
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                    <option>Mast.</option>
+                    <option>Baby</option>
+                    <option>Dr.</option>
+                </select>
+                </div>
+                <div class="col">
+                    <input type="text" id="txtFirstName" placeholder="First Name"/>
+                </div>
+                <div class="col">
+                <input  type="text" id="txtMiddleName" placeholder="Middle Name"/>
+                </div>
+                <div class="col">
+                    <input  type="text" id="txtLastName" placeholder="Last Name"/>
+                </div>
             </div>
-        </div>
-
-        <!-- Calendar Grid -->
-        <div class="table-responsive">
-            <table class="table table-bordered calendar-table m-0">
-                <thead>
-                    <tr>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                    </tr>
-                </thead>
-                <tbody id="calendarBody2">
-                    <!-- Days will be injected dynamically via jQuery -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <div class="row align-items-start" >
+                <div class="col">
+                    <input type="text" placeholder="Mobile Number"/>
+                </div>
+                <div class="col">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <input type="text" id="txtEmail" placeholder="Email"/>
+                        </div>
+                        <div class="col">
+                            <input id="chkNa" type="checkbox"/>
+                            <label for="chkNa">NA</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="datepicker" id="txtDob" placeholder="Date of Birth"/>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="Last Name"/>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <input type="text" placeholder="Martal Status"/>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="Emergency Contact"/>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="Profile Picture"/>
+                </div>
+            </div>
+        </section>
+        
+        <section id="addressDetailsSection">
+            <h2 class="form-section-heading">Address Details</h2>
+            <div class="row align-items-start" >
+                <div class="col-6">
+                    <input type="text" id="txtAddress1" placeholder="Address Line 1"/>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="txtAddress2" placeholder="Address Line 2"/>
+                </div>
+            </div>
+            <div class="row align-items-start" >
+                <div class="col">
+                    <select id="selCountry" class="form-dropdown">
+                        <option>United States</option>
+                        <option>Bangalore</option>
+                        <option>Bangladesh</option>
+                        <option>India</option>
+                        <option>Mexico</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="selState" class="form-dropdown">
+                        <option>OH</option>
+                        <option>AK</option>
+                        <option>AZ</option>
+                        <option>MD</option>
+                        <option>MS</option>
+                        <option>MT</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="selCity" class="form-dropdown">
+                        <option>Cincinnati</option>
+                        <option>Akron</option>
+                        <option>Blue Ash</option>
+                        <option>Fairfield</option>
+                        <option>Hamilton</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="PIN Code"/>
+                </div>
+            </div>
+        </section>
+    </form>
+</section>
 </div>
+<hr style="height:200px"/>
+<footer id="site-footer" class="site-footer" role="contentinfo">
+        <div class="design-credit">
+        <span>
+            © Copyright 2020  <a href="#">Jonathan Saddler.</a> </span>
+    </div>
+</footer>
 <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 <script id="jquery-core-js" src="./jquery-4.0.0/jquery4_0_0.min.js"></script>
 <script id="jquery-ui-js" src="./jquery-ui-1.14.2/jquery-ui.min.js"></script>
@@ -460,11 +501,6 @@ $(document).ready(function() {
 
         $("#calendarBody").html(htmlRows);
         
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true
-        });
     }
     function renderCalendar2(date) {
         const year = date.getFullYear();
@@ -577,7 +613,14 @@ $(document).ready(function() {
     });
 
     
-
+    $('.datepicker').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: "yy-mm-dd"
+    });
+    $( ".form-dropdown" ).selectmenu();
+    $( "#chkNa" ).checkboxradio();
     // Initial Trigger
     renderCalendar(currentDate);
     renderCalendar2(currentDate2);

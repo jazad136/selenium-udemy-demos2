@@ -1,34 +1,42 @@
 package com.techlynk.selenium.pilotproject;
 
-import java.time.Duration;
-import java.util.Iterator;
-import java.util.Set;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BookAppointmentOnDemand extends TestBaseClass {
     
+    
     @Test
     public void bookAppointmentTest() throws Exception { 
-        // Open Webpage
         driver.get(prop.getProperty("url"));
         waitForWebPageToLoad();
+//        driver.findElement(By.id(prop.getProperty("OnDemandDoctor")));
+        selectAppointmentDate();
+//        driver.findElement(By.id("gotoAppointment_id")).click();
+        dismissAlert();
+//        driver.findElement(By.xpath(prop.getProperty("mobilenumber_xpath"))).sendKeys("5555555555");
+//        driver.findElement(By.xpath(prop.getProperty("continue_xpath")));
+        String nameTitle = prop.getProperty("nameTitle");
+        String firstName = prop.getProperty("firstName");
+        String lastName = prop.getProperty("lastName");
+        String email = prop.getProperty("patient_email");
+        String dob = prop.getProperty("dob");
+        String city = prop.getProperty("CityName");
+        String state = prop.getProperty("StateName");
+        // Select title
         
-        // Open Doctor Appointment Page
-        driver.findElement(By.linkText(prop.getProperty("OnDemandDoctor"))).click();
-        // Handle New Tab Windows
+        selectValueFromDropdown(driver.findElement(By.id(prop.getProperty("title_id"))), nameTitle);
+        // Enter first name
+        driver.findElement(By.id(prop.getProperty("firstName_id"))).sendKeys(firstName);
+        // Enter last name
+        driver.findElement(By.id(prop.getProperty("lastName_id"))).sendKeys(lastName);
+        // Select DOB
+        driver.findElement(By.id(prop.getProperty("dob_id"))).click();
+        // Select State
+        selectFromDropDown(driver.findElement(By.id(prop.getProperty("state_id"))), state);
+        // Select City
+        selectFromDropDown(driver.findElement(By.id(prop.getProperty("city_id"))), city);
         
-        Set<String > windowIds = driver.getWindowHandles();
-        Iterator<String> itr = windowIds.iterator();
-        String homePageID = itr.next();
-        String bookAppointmentPageID = itr.next();
-        
-        driver.switchTo().window(bookAppointmentPageID);
-        
-        Assert.assertEquals(driver.findElement(By.xpath(prop.getProperty("doctorverification_xpath"))).getText(), prop.getProperty("OnDemandDoctor"));
     }
     
 }

@@ -330,12 +330,12 @@
             <div class="col">
                 <h6>Preferred Date 1</h6>
                 <label for="prefDate1">Preferred Date 1</label>
-                <input type="text" placeholder="mm-dd-yyyy" class="datepicker form-control"/>
+                <input type="text" id="prefDate1" placeholder="mm-dd-yyyy" class="datepicker form-control"/>
             </div>
             <div class="col">
                 <h6>Preferred Date 2</h6>
                 <label for="prefDate2">Preferred Date 2</label>
-                <input type="text" placeholder="mm-dd-yyyy" class="datepicker form-control"/>
+                <input type="text" id="prefDate2" placeholder="mm-dd-yyyy" class="datepicker2 form-control"/>
             </div>
         </div>
     </div>
@@ -344,7 +344,7 @@
     </div>
 
 	<div class="container">
-		<div class="calendar-container">
+		<div id="calendar1" class="calendar-container">
 			<!-- Calendar Header Navigation -->
 			<div class="d-flex justify-content-between align-items-center mb-4">
 				<h2 id="monthYearTitle" class="mb-0 fw-bold text-dark"></h2>
@@ -382,42 +382,42 @@
 	</div>
 	<h2 style="text-align: center">Here is another calendar</h2>
     <div class="container">
-    <div class="calendar-container">
-        <!-- Calendar Header Navigation -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="monthYearTitle2" class="mb-0 fw-bold text-dark"></h2>
-            <div class="btn-group">
-                <button id="prevMonthBtn2" class="btn btn-outline-secondary">
-                    <i class="bi bi-chevron-left"></i> Prev
-                </button>
-                <button id="todayBtn2" class="btn btn-outline-primary">Today</button>
-                <button id="nextMonthBtn2" class="btn btn-outline-secondary">
-                    Next <i class="bi bi-chevron-right"></i>
-                </button>
+        <div id="calendar2" class="calendar-container">
+            <!-- Calendar Header Navigation -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 id="monthYearTitle2" class="mb-0 fw-bold text-dark"></h2>
+                <div class="btn-group">
+                    <button id="prevMonthBtn2" class="btn btn-outline-secondary">
+                        <i class="bi bi-chevron-left"></i> Prev
+                    </button>
+                    <button id="todayBtn2" class="btn btn-outline-primary">Today</button>
+                    <button id="nextMonthBtn2" class="btn btn-outline-secondary">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="table-responsive">
+                <table class="table table-bordered calendar-table m-0">
+                    <thead>
+                        <tr>
+                            <th>Sunday</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendarBody2">
+                        <!-- Days will be injected dynamically via jQuery -->
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <!-- Calendar Grid -->
-        <div class="table-responsive">
-            <table class="table table-bordered calendar-table m-0">
-                <thead>
-                    <tr>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                    </tr>
-                </thead>
-                <tbody id="calendarBody2">
-                    <!-- Days will be injected dynamically via jQuery -->
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>
 <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 <script id="jquery-core-js" src="./jquery-4.0.0/jquery4_0_0.min.js"></script>
 <script id="jquery-ui-js" src="./jquery-ui-1.14.2/jquery-ui.min.js"></script>
@@ -635,10 +635,21 @@ $(document).ready(function() {
     // Initial Trigger
     renderCalendar(currentDate);
     renderCalendar2(currentDate2);
+    // $('.datepicker').datepicker({
+    //     format: 'yyyy-mm-dd',
+    //     autoclose: true,
+    //     todayHighlight: true
+    // });
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true
+        changeMonth: false,
+        changeYear: false,
+        dateFormat: "yy-mm-dd"
+    });
+    $('.datepicker2').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: "yy-mm-dd"
     });
 });
 </script>
