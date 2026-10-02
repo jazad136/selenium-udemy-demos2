@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 /**
  *
@@ -22,6 +25,24 @@ import org.testng.annotations.AfterMethod;
 public class TestBaseClass {
     protected WebDriver driver = null;
     protected Properties prop = null;
+//    protected String propsFilename = "src/main/resources/sakrahospital_bookAppointment.properties";
+    protected String propsFilename = "src/main/resources/practicetestwebsite.properties";
+    
+    /**
+     * 
+     * @param displayDate
+     * @return find the integer number in the display date
+     */
+    public String findNumberDayInDisplayDate(String displayDate) { 
+        // Sat, 16 Mar
+        //      ^^ 
+        String pattern = "\\d+";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(displayDate);
+        while(m.find())  
+            System.out.println("Number Date : " + m.group());
+        return m.group();
+    }
     
     public void datePickerFromSlidingCalendar(String suppliedDate) { 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -89,12 +110,13 @@ public class TestBaseClass {
         Select dropdown = new Select(element);
         dropdown.selectByVisibleText(selectable);
     }
+    @BeforeMethod(alwaysRun=true)
     public void init() { 
         driver = new ChromeDriver();
 //        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         prop = new Properties();
-        try(FileInputStream fis = new FileInputStream("src/main/resources/sakrahospital_bookAppointment.properties")) { 
+        try(FileInputStream fis = new FileInputStream(propsFilename)) { 
             prop.load(fis);
         } catch(IOException e) {
 //            throw new RuntimeException("Unexpected problem reading file sakrahospital_bookAppointment.properties file in src/main/resources");
