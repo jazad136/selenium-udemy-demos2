@@ -4,7 +4,7 @@ package keywords;
  *
  * @author JonathanSaddler
  */
-public class ApplicationKeywords {
+public class ApplicationKeywords extends ValidationKeywords {
     
     public void login() {
         

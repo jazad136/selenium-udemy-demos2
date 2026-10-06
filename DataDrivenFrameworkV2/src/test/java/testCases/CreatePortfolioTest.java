@@ -1,11 +1,15 @@
 package testCases;
 
+import keywords.ApplicationKeywords;
+import org.testng.annotations.Test;
+
 /**
  *
  * @author JonathanSaddler
  */
-public class CreatePortfolioTest {
+public class CreatePortfolioTest extends ApplicationKeywords {
     
+    @Test
     public void createPortfolioTest() { 
         /*
          * 1. Open Target Webpage
@@ -17,5 +21,22 @@ public class CreatePortfolioTest {
          * 7. Enter Portfolio Name. 
          * 8. Click on Create Portfolio Link
          */
+        /*
+         * Generic
+         *   | 
+         * Validation 
+         *   | 
+         * Application 
+         *   | 
+         * Test Classes
+        */
+        ApplicationKeywords app = new ApplicationKeywords();
+        app.openBrowser("chrome");
+        app.click();
+        app.type("UserName");
+        app.type("Password");
+        app.click();
+        app.validateTitle();
+        app.click();
     }
 }

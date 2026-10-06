@@ -4,7 +4,7 @@ package keywords;
  *
  * @author JonathanSaddler
  */
-public class ValidationKeywords {
+public class ValidationKeywords extends GenericKeywords {
     public void validateTitle() { 
         
     }
