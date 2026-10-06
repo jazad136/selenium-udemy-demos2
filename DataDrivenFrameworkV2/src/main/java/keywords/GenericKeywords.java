@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package keywords;
 
 /**
@@ -10,4 +6,35 @@ package keywords;
  */
 public class GenericKeywords {
     
+    public void openBrowser() {
+        
+    }
+    
+    public void click() {
+        
+    }
+    
+    public void type() {
+        
+    }
+    
+    public void select() {
+        
+    }
+    
+    public void getText() {
+        
+    }
+    
+    public void navigate() {
+        
+    }
+    
+    public void acceptAlert() {
+        
+    }
+    
+    public void dismissAlert() {
+        
+    }
 }
