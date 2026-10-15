@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class CreatePortfolioTest extends ApplicationKeywords {
     
     @Test
-    public void createPortfolioTest() { 
+    public void createPortfolioTest() {
         /*
          * 1. Open Target Webpage
          * 2. Click on SignIn Button/Link
@@ -31,12 +31,15 @@ public class CreatePortfolioTest extends ApplicationKeywords {
          * Test Classes
         */
         ApplicationKeywords app = new ApplicationKeywords();
-        app.openBrowser("chrome");
-        app.click();
-        app.type("UserName");
-        app.type("Password");
-        app.click();
-        app.validateTitle();
-        app.click();
+        app.openBrowser("browser_name");
+        app.openURL("URL");
+        app.click("signIn_linkText");
+        app.type("username_id", "student");
+        app.type("password_id", "Password123");
+//        app.enterCaptcha("captcha_id");
+        app.clickButton("submitBtn_id");
+        app.validateTitle("successTitle");
+//        app.click("Create Portfolio Link");
+        app.shutdown();
     }
 }
