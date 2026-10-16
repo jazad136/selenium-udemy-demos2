@@ -8,3 +8,4 @@ SeleniumDemoProject/.settings/
 
 SeleniumDemoProject/src/test/resources/Screenshots/
 *.zip
+/DataDrivenFrameworkV2/target/

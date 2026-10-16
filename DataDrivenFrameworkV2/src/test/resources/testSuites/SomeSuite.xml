@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM 'testng-1.0.dtd'>
+<suite name="Full Suite">
+    <test name="Create Portfolio Test">
+        <classes>
+            <class name="testCases.rediffPortfolio.ManageSessionTest">
+                <methods>
+                    <include name="doLogin"/>
+                </methods>
+            </class>
+            <class name="testCases.rediffPortfolio.ManagePortfolioTest">
+                <methods>
+                    <include name="createPortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Delete Portfolio Test">
+        <classes>
+            <class name="testCases.rediffPortfolio.ManagePortfolioTest">
+                <methods>
+                    <include name="deletePortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test><!-- Test -->
+</suite><!-- Suite -->
