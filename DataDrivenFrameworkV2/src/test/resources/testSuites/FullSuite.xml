@@ -1,23 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM 'testng-1.0.dtd'>
 <suite name="Full Suite">
-    <test name="Suite" thread-count="5">
+    <test name="Create Portfolio Test">
         <classes>
             <class name="testCases.rediffPortfolio.ManageSessionTest">
                 <methods>
                     <include name="doLogin"/>
-                    <include name="doLogOut"/>
                 </methods>
             </class>
             <class name="testCases.rediffPortfolio.ManagePortfolioTest">
                 <methods>
-                    <include name="addStockTest"/>
-                    <include name="modifyStockTest"/>
+                    <include name="createPortfolio"/>
                 </methods>
             </class>
-            <class name="testCases.rediffPortfolio.ManageStocksTest">
+        </classes>
+    </test>
+    <test name="Delete Portfolio Test">
+        <classes>
+            <class name="testCases.rediffPortfolio.ManagePortfolioTest">
                 <methods>
-                    <include name="createPortfolio"/>
                     <include name="deletePortfolio"/>
                 </methods>
             </class>

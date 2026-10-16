@@ -1,18 +1,26 @@
 package testCases.rediffPortfolio;
 
+import java.io.File;
+import java.util.Date;
+
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
 
 /**
  *
  * @author JonathanSaddler
  */
-public class ManagePortfolioTest {
+public class ManagePortfolioTest extends BaseTest{
     @Test
-    public void createPortfolio() { 
-        System.out.println("Creating portfolio...");
+    public void createPortfolio(ITestContext con) { 
+        app.i("Creating portfolio...");
+        app.openBrowser("browser_name");
+        app.openURL("URL");
     }
     @Test
     public void deletePortfolio() { 
-        System.out.println("Deleting portfolio...");
+        app.i("Deleting portfolio...");
     }
 }

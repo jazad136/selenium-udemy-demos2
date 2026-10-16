@@ -1,19 +1,21 @@
 package testCases.rediffPortfolio;
 
+import keywords.ApplicationKeywords;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author JonathanSaddler
  */
-public class ManageSessionTest {
+public class ManageSessionTest extends BaseTest{
     @Test
-    public void doLogin() { 
-        System.out.println("***** Login Application *****");
-        
+    public void doLogin(ITestContext con) { 
+        app.i("***** Login Application *****");
+        app.openBrowser("browser_name");
     }
     @Test
     public void doLogout() { 
-        System.out.println("***** LogOut Application *****");
+        app.i("***** LogOut Application *****");
     }
 }

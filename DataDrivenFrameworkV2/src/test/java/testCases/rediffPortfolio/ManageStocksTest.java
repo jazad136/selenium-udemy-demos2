@@ -10,12 +10,12 @@ import org.testng.annotations.Test;
  *
  * @author JonathanSaddler
  */
-public class ManageStocksTest {
+public class ManageStocksTest extends BaseTest{
     @Test
     public void addStockTest() { 
-        System.out.println("Adding Stocks in Portfolio");
+        app.i("Adding Stocks in Portfolio...");
     }
     public void modifyStockTest() { 
-        System.out.println("Modifying Stocks in Portfolio");
+        app.i("Modifying Stocks in Portfolio...");
     }
 }

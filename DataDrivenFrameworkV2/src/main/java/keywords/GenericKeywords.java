@@ -2,6 +2,7 @@ package keywords;
 
 import java.time.Duration;
 import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
 /**
  *
  * @author JonathanSaddler
@@ -18,6 +22,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class GenericKeywords {
     public WebDriver driver = null;
     public Properties prop;
+    public ExtentTest test;
+    
     
     public void openBrowser(String propertyKey) {
         String browser = prop.getProperty(propertyKey);
@@ -29,21 +35,23 @@ public class GenericKeywords {
         };
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
-    
+    public void setReport(ExtentTest test) { 
+    	this.test = test;
+    }
     public void shutdown() { 
         driver.close();
     }
     public void openURL(String URLKey) { 
-        System.out.println("Opening Web URL : " + prop.getProperty(URLKey));
+        i("Opening Web URL : " + prop.getProperty(URLKey));
         driver.get(prop.getProperty(URLKey));
     }
     
     public void click(String locatorKey) {
-        System.out.println("Perform Click on Locator : " + prop.getProperty(locatorKey));
+        i("Perform Click on Locator : " + prop.getProperty(locatorKey));
         getElement(locatorKey).click();
     }
     public void clickButton(String locatorKey) {
-        System.out.println("Perform Click on Locator : " + prop.getProperty(locatorKey));
+        i("Perform Click on Locator : " + prop.getProperty(locatorKey));
         getElement(locatorKey).click();
     }
     
@@ -70,12 +78,12 @@ public class GenericKeywords {
         return by;
     }
     public void type(String locatorKey, String value) {
-        System.out.println("Typing Text : " + value + " in Locator : " + prop.getProperty(locatorKey));
+        i("Typing Text : " + value + " in Locator : " + prop.getProperty(locatorKey));
         getElement(locatorKey).sendKeys(value);
     }
     
     public void enterCaptcha(String locatorKey) { 
-        System.out.println("Given Captcha Locator : " + prop.getProperty(locatorKey));
+        i("Given Captcha Locator : " + prop.getProperty(locatorKey));
 //        Scanner scanner = new Scanner(System.in);
         // handle the issue using user input
         // getElement(locator).sendKeys(locator);
@@ -134,5 +142,31 @@ public class GenericKeywords {
             return false;
         }
         return true;
+    }
+    
+    public void i(String msg) {
+        System.out.println(msg);
+        test.info(msg);
+    }
+    public void iFormat(String formatMsg, Object... formatObjs) {
+        System.out.printf(formatMsg + "\n", formatObjs);
+        test.info(String.format(formatMsg + "\n", formatObjs));
+    }
+    public void error(String msg) { 
+    	System.out.println(msg);
+    	test.fail(msg);
+    }
+    
+    public void pass(String msg) { 
+        System.out.println(msg);
+        test.pass(msg);
+    }
+    public void fail(String msg) { 
+        System.out.println(msg);
+        test.fail(msg);
+    }
+    public void skip(String msg) { 
+        System.out.println(msg);
+        test.skip(msg);
     }
 }
