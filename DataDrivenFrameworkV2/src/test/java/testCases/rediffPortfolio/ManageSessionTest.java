@@ -15,13 +15,13 @@ public class ManageSessionTest extends BaseTest{
         app.openBrowser("browser_name");
         app.openURL("URL");
         // arbitrary added failure
-        app.reportFailure("Unable to open URL ....");
+//        app.reportFailure("Unable to open URL ....");
         app.click("signIn_linkText");
         app.type("username_id", "student");
         // arbitrary added failure
-        app.reportFailure("Unable to Click submit button", true);
+//        app.reportFailure("Unable to Click submit button", true);
         app.type("password_id", "Password123");
-        
+        app.reportAll();
     }
     @Test
     public void doLogout() { 
