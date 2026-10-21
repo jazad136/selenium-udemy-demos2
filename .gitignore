@@ -4,7 +4,11 @@ SeleniumDemoProject/.factorypath
 SeleniumDemoProject/.classpath
 SeleniumDemoProject/.project
 SeleniumDemoProject/.settings/
-
+DataDrivenFrameworkV2/.factorypath
+DataDrivenFrameworkV2/.classpath
+DataDrivenFrameworkV2/.project
+DataDrivenFrameworkV2/.settings
+DataDrivenFrameworkV2/test-output
 
 SeleniumDemoProject/src/test/resources/Screenshots/
 *.zip
