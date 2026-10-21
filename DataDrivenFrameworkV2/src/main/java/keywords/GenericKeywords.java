@@ -2,6 +2,8 @@ package keywords;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -74,16 +76,10 @@ public class GenericKeywords {
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         File screenshotFilestem = new File(ExtentManager.screenshotPath, screenshotFilestemStr);
         File copiedFile = copyScreenshot(srcFile, screenshotFilestem);
-        test.log(Status.INFO, "Screenshot -- "
-            + test.addScreenCaptureFromPath(copiedFile.getAbsolutePath()));
-//        try {
-//            Files.copy(srcFile.toPath(), screenshotFile.toPath());
-//            // put screenshot in extent report
-//            test.log(Status.INFO, "Screenshot -- "
-//            + test.addScreenCaptureFromPath(screenshotFile.getAbsolutePath()));
-//        } catch(IOException e) {
-//            e.printStackTrace();
-//        }
+//        test.log(Status.INFO, "Screenshot -- "
+//            + test.addScreenCaptureFromPath(copiedFile.getAbsolutePath()));
+        test.log(Status.FAIL, MarkupHelper.createLabel("Screenshot", ExtentColor.GREEN));
+        test.log(Status.FAIL, "<a href='" + copiedFile.getAbsolutePath() + "'><img src='" + copiedFile.getAbsolutePath() + "' style='width:100%;'/></a>");
     }
     public File copyScreenshot(File srcFile, File screenshotFilestem) { 
         int adderNum = 2;
