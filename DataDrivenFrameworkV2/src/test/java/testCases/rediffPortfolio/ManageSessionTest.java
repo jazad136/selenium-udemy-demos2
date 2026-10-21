@@ -18,9 +18,9 @@ public class ManageSessionTest extends BaseTest{
         app.reportFailure("Unable to open URL ....");
         app.click("signIn_linkText");
         app.type("username_id", "student");
-        app.type("password_id", "Password123");
         // arbitrary added failure
-        app.reportFailure("Unable to Click submit button");
+        app.reportFailure("Unable to Click submit button", true);
+        app.type("password_id", "Password123");
         
     }
     @Test

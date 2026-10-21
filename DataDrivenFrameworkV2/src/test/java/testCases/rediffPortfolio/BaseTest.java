@@ -10,6 +10,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
 import keywords.ApplicationKeywords;
+import org.testng.SkipException;
 import reports.ExtentManager;
 
 /**
@@ -38,6 +39,11 @@ public class BaseTest {
         app = (ApplicationKeywords) context.getAttribute("app");
         extentReport = (ExtentReports) context.getAttribute("extentReport");
         extentTest = (ExtentTest) context.getAttribute("extentTest");
+        String criticalFailure = (String) context.getAttribute("isCriticalFailure");
+        if(criticalFailure != null && criticalFailure.equals("true")) {
+            app.logSkip("Critical Failure in a Previous Test Method");
+            throw new SkipException("Critical Failure in a Previous Test Method");
+        }
     }
 
     @AfterTest

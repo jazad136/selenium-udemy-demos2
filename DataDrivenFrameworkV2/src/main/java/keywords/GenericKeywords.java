@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
 /**
@@ -26,6 +27,7 @@ public class GenericKeywords {
     
     public void openBrowser(String propertyKey) {
         String browser = prop.getProperty(propertyKey);
+        i("Opening Browser -- " + browser);
         driver = switch (browser.toLowerCase()) {
             case "chrome" -> new ChromeDriver();
             case "firefox" -> new FirefoxDriver();
@@ -40,10 +42,18 @@ public class GenericKeywords {
     public void shutdown() { 
         driver.close();
     }
-    public void reportFailure(String msg) {
-        error(msg);
+    public void reportFailure(String msg, boolean isCriticalFailure) { 
+        logError(msg);
         softAssert.fail(msg);
+        if(isCriticalFailure) {
+            Reporter.getCurrentTestResult().getTestContext().setAttribute("isCriticalFailure", "true");            
+            reportAll();
+        }
     }
+    public void reportFailure(String msg) {
+        reportFailure(msg, false);
+    }
+    
     public void reportAll() { 
         softAssert.assertAll();
     }
@@ -161,7 +171,7 @@ public class GenericKeywords {
         System.out.printf(formatMsg + "\n", formatObjs);
         test.info(String.format(formatMsg + "\n", formatObjs));
     }
-    public void error(String msg) { 
+    public void logError(String msg) { 
     	System.out.println(msg);
     	test.fail(msg);
     }
@@ -174,7 +184,7 @@ public class GenericKeywords {
         System.out.println(msg);
         test.fail(msg);
     }
-    public void skip(String msg) { 
+    public void logSkip(String msg) { 
         System.out.println(msg);
         test.skip(msg);
     }
