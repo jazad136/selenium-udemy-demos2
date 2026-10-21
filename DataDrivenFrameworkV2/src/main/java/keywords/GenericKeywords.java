@@ -41,6 +41,7 @@ public class GenericKeywords {
         driver.close();
     }
     public void reportFailure(String msg) {
+        error(msg);
         softAssert.fail(msg);
     }
     public void reportAll() { 

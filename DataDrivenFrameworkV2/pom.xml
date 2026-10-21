@@ -17,6 +17,8 @@
         <testResources>
             <testResource><directory>src/test/resources</directory></testResource>
             <testResource><directory>src/test/resources/Reports</directory></testResource>
+            <testResource><directory>src/test/resources/Properties</directory></testResource>
+            <testResource><directory>src/test/resources/testSuites</directory></testResource>
         </testResources>
         <resources>
             <resource><directory>src/main/resources</directory></resource>

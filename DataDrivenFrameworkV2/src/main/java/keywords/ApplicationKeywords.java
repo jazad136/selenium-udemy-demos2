@@ -27,7 +27,8 @@ public class ApplicationKeywords extends ValidationKeywords {
     public void selectDate() { 
         
     }
-    public void quitDriver() { 
-    	driver.quit();
+    public void quitDriver() {
+        if(driver != null)
+            driver.quit();
     }
 }

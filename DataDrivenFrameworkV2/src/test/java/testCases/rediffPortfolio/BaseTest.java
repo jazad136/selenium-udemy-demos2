@@ -39,19 +39,23 @@ public class BaseTest {
         extentReport = (ExtentReports) context.getAttribute("extentReport");
         extentTest = (ExtentTest) context.getAttribute("extentTest");
     }
-//    @AfterMethod(alwaysRun = true)
-//    public void afterMethod() { 
-//    	System.out.println("***** After Method *****");
-//    }
+
     @AfterTest
     public void afterTest(ITestContext context) {
 //        System.out.println("***** After Test *****");
     	app = (ApplicationKeywords) context.getAttribute("app");
     	if(app != null)
-    		app.quitDriver();
-
+            app.quitDriver();
+        
     	extentReport = (ExtentReports) context.getAttribute("extentReport");
     	if(extentReport != null) 
     		extentReport.flush();
+    }
+    @AfterMethod(alwaysRun=true)
+    public void afterMethod(ITestContext context) { 
+        app = (ApplicationKeywords) context.getAttribute("app");
+        if(app != null)
+            app.quitDriver();
+        app.reportAll();
     }
 }

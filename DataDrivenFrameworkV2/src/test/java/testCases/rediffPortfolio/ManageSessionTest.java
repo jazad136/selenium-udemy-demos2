@@ -21,6 +21,7 @@ public class ManageSessionTest extends BaseTest{
         app.type("password_id", "Password123");
         // arbitrary added failure
         app.reportFailure("Unable to Click submit button");
+        
     }
     @Test
     public void doLogout() { 
