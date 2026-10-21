@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package testCases.rediffPortfolio;
 
 import org.testng.ITestContext;
@@ -26,7 +22,6 @@ public class BaseTest {
     public ExtentTest extentTest;
     @BeforeTest
     public void beforeTest(ITestContext context) {
-//        System.out.println("***** Before Test *****");
         ApplicationKeywords app = new ApplicationKeywords();
         context.setAttribute("app", app);
         
