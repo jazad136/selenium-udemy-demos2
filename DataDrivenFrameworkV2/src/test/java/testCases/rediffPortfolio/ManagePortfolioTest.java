@@ -16,8 +16,9 @@ public class ManagePortfolioTest extends BaseTest{
     @Test
     public void createPortfolio(ITestContext con) { 
         app.i("Creating portfolio...");
-        app.openBrowser("browser_name");
-        app.openURL("URL");
+        app.reportFailure("Unable to create portfolio....");
+//        app.openBrowser("browser_name");
+//        app.openURL("URL");
     }
     @Test
     public void deletePortfolio() { 
