@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package testCases.rediffPortfolio;
 
 import org.testng.ITestContext;
@@ -14,6 +10,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
 import keywords.ApplicationKeywords;
+import org.testng.SkipException;
 import reports.ExtentManager;
 
 /**
@@ -26,7 +23,6 @@ public class BaseTest {
     public ExtentTest extentTest;
     @BeforeTest
     public void beforeTest(ITestContext context) {
-//        System.out.println("***** Before Test *****");
         ApplicationKeywords app = new ApplicationKeywords();
         context.setAttribute("app", app);
         
@@ -43,20 +39,29 @@ public class BaseTest {
         app = (ApplicationKeywords) context.getAttribute("app");
         extentReport = (ExtentReports) context.getAttribute("extentReport");
         extentTest = (ExtentTest) context.getAttribute("extentTest");
+        String criticalFailure = (String) context.getAttribute("isCriticalFailure");
+        if(criticalFailure != null && criticalFailure.equals("true")) {
+            app.logSkip("Critical Failure in a Previous Test Method");
+            throw new SkipException("Critical Failure in a Previous Test Method");
+        }
     }
-//    @AfterMethod(alwaysRun = true)
-//    public void afterMethod() { 
-//    	System.out.println("***** After Method *****");
-//    }
+
     @AfterTest
     public void afterTest(ITestContext context) {
 //        System.out.println("***** After Test *****");
     	app = (ApplicationKeywords) context.getAttribute("app");
     	if(app != null)
-    		app.quitDriver();
-
+            app.quitDriver();
+        
     	extentReport = (ExtentReports) context.getAttribute("extentReport");
     	if(extentReport != null) 
     		extentReport.flush();
+    }
+    @AfterMethod(alwaysRun=true)
+    public void afterMethod(ITestContext context) { 
+        app = (ApplicationKeywords) context.getAttribute("app");
+        if(app != null)
+            app.quitDriver();
+        app.reportAll();
     }
 }
