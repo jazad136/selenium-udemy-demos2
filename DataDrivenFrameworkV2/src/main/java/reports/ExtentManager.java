@@ -16,15 +16,15 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
  * @author JonathanSaddler
  */
 public class ExtentManager {
-    static ExtentReports reports;
-   
+    public static ExtentReports reports;
+    public static File screenshotPath;
     public static ExtentReports getReports() {
         if(reports == null) { 
             reports = new ExtentReports();
             Date date = new Date();
             String reportFolderName = date.toString().replaceAll(":", "_").replaceAll(" ", "-");
             File reportPath = new File("target/Reports", reportFolderName);
-            File screenshotPath = new File(reportPath, "Screenshots");
+            screenshotPath = new File(reportPath, "Screenshots");
             screenshotPath.mkdirs();
             ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
             reporter.config().setTheme(Theme.STANDARD);

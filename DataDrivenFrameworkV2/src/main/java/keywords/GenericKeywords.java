@@ -1,9 +1,19 @@
 package keywords;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
+import reports.ExtentManager;
 
 /**
  *
@@ -44,6 +55,7 @@ public class GenericKeywords {
     }
     public void reportFailure(String msg, boolean isCriticalFailure) { 
         logError(msg);
+        takeScreenShot();
         softAssert.fail(msg);
         if(isCriticalFailure) {
             Reporter.getCurrentTestResult().getTestContext().setAttribute("isCriticalFailure", "true");            
@@ -53,7 +65,48 @@ public class GenericKeywords {
     public void reportFailure(String msg) {
         reportFailure(msg, false);
     }
-    
+    public void takeScreenShot() { 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String formattedDate = dateFormat.format(currentDate);
+        String screenshotFilestemStr = formattedDate;
+        // take screenshot
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File screenshotFilestem = new File(ExtentManager.screenshotPath, screenshotFilestemStr);
+        File copiedFile = copyScreenshot(srcFile, screenshotFilestem);
+        test.log(Status.INFO, "Screenshot -- "
+            + test.addScreenCaptureFromPath(copiedFile.getAbsolutePath()));
+//        try {
+//            Files.copy(srcFile.toPath(), screenshotFile.toPath());
+//            // put screenshot in extent report
+//            test.log(Status.INFO, "Screenshot -- "
+//            + test.addScreenCaptureFromPath(screenshotFile.getAbsolutePath()));
+//        } catch(IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+    public File copyScreenshot(File srcFile, File screenshotFilestem) { 
+        int adderNum = 2;
+        Path srcFilePath = srcFile.toPath();
+        File screenshotNewFile = new File(screenshotFilestem.getParent(), screenshotFilestem.getName() + ".png");
+        boolean printedMessage = false;
+        do {
+            try {
+                Files.copy(srcFilePath, screenshotNewFile.toPath());
+                return screenshotNewFile;
+            } catch(FileAlreadyExistsException fae) { 
+                if(!printedMessage)
+                    System.err.println("Snapshot File " + screenshotNewFile + " already exists");
+                String adder = "_" + adderNum;
+                screenshotNewFile = new File(screenshotFilestem.getParentFile(), screenshotFilestem.getName() + adder + ".png");
+                adderNum++;
+            } catch(IOException e) {
+                e.printStackTrace();
+                break;
+            }
+        }while(true);
+        return null;
+    }
     public void reportAll() { 
         softAssert.assertAll();
     }
