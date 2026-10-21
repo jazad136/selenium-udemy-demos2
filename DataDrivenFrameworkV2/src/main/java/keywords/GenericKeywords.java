@@ -1,8 +1,8 @@
 package keywords;
 
+import com.aventstack.extentreports.ExtentTest;
 import java.time.Duration;
 import java.util.Properties;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,9 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+import org.testng.asserts.SoftAssert;
 
 /**
  *
@@ -21,6 +19,7 @@ import com.aventstack.extentreports.ExtentTest;
  */
 public class GenericKeywords {
     public WebDriver driver = null;
+    public SoftAssert softAssert = null;
     public Properties prop;
     public ExtentTest test;
     
@@ -40,6 +39,12 @@ public class GenericKeywords {
     }
     public void shutdown() { 
         driver.close();
+    }
+    public void reportFailure(String msg) {
+        softAssert.fail(msg);
+    }
+    public void reportAll() { 
+        softAssert.assertAll();
     }
     public void openURL(String URLKey) { 
         i("Opening Web URL : " + prop.getProperty(URLKey));
@@ -126,8 +131,10 @@ public class GenericKeywords {
     protected boolean isElementPresent(String locatorKey) { 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         try { 
-        wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey)));
+            wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey)));
         } catch(Exception e) { 
+            reportFailure("Unable to locate Element with locator : " + getLocator(locatorKey));
+            reportFailure(e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -136,8 +143,9 @@ public class GenericKeywords {
     protected boolean isElementVisible(String locatorKey) { 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         try { 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getLocator(locatorKey)));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(getLocator(locatorKey)));
         } catch(Exception e) { 
+            reportFailure(e.getMessage());
             e.printStackTrace();
             return false;
         }

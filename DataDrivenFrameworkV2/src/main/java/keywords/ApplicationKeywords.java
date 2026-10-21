@@ -3,6 +3,7 @@ package keywords;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import org.testng.asserts.SoftAssert;
 
 /**
  *
@@ -17,6 +18,7 @@ public class ApplicationKeywords extends ValidationKeywords {
         } catch(IOException e) {
             throw new RuntimeException("Unexpected problem reading file %s properties file".formatted(propsFilename));
         }
+        softAssert = new SoftAssert();
     }
     public void login() {
         
