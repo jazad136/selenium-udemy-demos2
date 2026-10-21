@@ -1,5 +1,6 @@
 package testListener;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -9,12 +10,15 @@ import org.testng.ITestResult;
  */
 public class MyTestNGListener implements ITestListener {
     public void onTestFailure(ITestResult result) { 
-        System.out.println("****** TEST FAIL ******");
+        ExtentTest test = (ExtentTest) result.getTestContext().getAttribute("extentTest");
+        test.fail(result.getThrowable().getMessage());
     }
     public void onTestSuccess(ITestResult result) { 
-        System.out.println("****** TEST SUCCESS ******");
+        ExtentTest test = (ExtentTest) result.getTestContext().getAttribute("extentTest");
+        test.pass("Test Success : " + result.getName());
     }
     public void onTestSkipped(ITestResult result) { 
-        System.out.println("****** TEST SKIPPED ******");
+        ExtentTest test = (ExtentTest) result.getTestContext().getAttribute("extentTest");
+        test.skip(result.getName() + " :: Test Skipped Due to Critical Error in Previous Test");
     }
 }
