@@ -13,9 +13,13 @@ public class ManagePortfolioTest extends BaseTest{
     @Test
     public void createPortfolio(ITestContext con) { 
         app.i("Creating portfolio...");
-//        app.reportFailure("Unable to create portfolio....");
-//        app.openBrowser("browser_name");
-//        app.openURL("URL");
+        app.openBrowser("browser_name");
+        app.openURL("URL");
+        app.click("signIn_linkText");
+        app.type("username_id", "student");
+        app.type("password_id", "Password123");
+        app.click("submitBtn_id");
+        app.reportAll();
     }
     @Test
     public void deletePortfolio() { 
