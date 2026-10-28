@@ -17,6 +17,7 @@ public class ManageSessionTest extends BaseTest{
         app.click("signIn_linkText");
         app.type("username_id", "student");
         app.type("password_id", "Password123");
+        app.clickButton("submitBtn_id");
         app.reportAll();
     }
     @Test
