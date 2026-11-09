@@ -60,8 +60,8 @@ public class BaseTest {
     @AfterMethod(alwaysRun=true)
     public void afterMethod(ITestContext context) { 
         app = (ApplicationKeywords) context.getAttribute("app");
-        if(app != null)
-            app.quitDriver();
+//        if(app != null)
+//            app.quitDriver();
         app.reportAll();
     }
 }

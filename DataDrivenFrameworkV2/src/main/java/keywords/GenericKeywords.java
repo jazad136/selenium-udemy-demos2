@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +25,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
@@ -36,7 +40,7 @@ public class GenericKeywords {
     public SoftAssert softAssert = null;
     public Properties prop;
     public ExtentTest test;
-    
+    private static int GLOBAL_IMPLICIT_WAIT_TIME = 15;
     
     public void openBrowser(String propertyKey) {
         String browser = prop.getProperty(propertyKey);
@@ -47,7 +51,7 @@ public class GenericKeywords {
             case "edge" -> new EdgeDriver();
             default -> new ChromeDriver();
         };
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GLOBAL_IMPLICIT_WAIT_TIME));
     }
     public void setReport(ExtentTest test) { 
     	this.test = test;
@@ -147,18 +151,119 @@ public class GenericKeywords {
         getElement(locatorKey).sendKeys(value);
     }
     
+    public void selectByVisibleText(String locatorKey, String value) {
+        i("Selecting Portfolio :: " + value);
+        Select dropDown = new Select(getElement(locatorKey));
+        dropDown.selectByVisibleText(value);
+    }
+    
     public void enterCaptcha(String locatorKey) { 
         i("Given Captcha Locator : " + prop.getProperty(locatorKey));
 //        Scanner scanner = new Scanner(System.in);
         // handle the issue using user input
         // getElement(locator).sendKeys(locator);
     }
+    public void selectDateFromCalendar(String date) {
+        i("Selecting the Date :: " + date);
+        try { 
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date dateToSelect = dFormat.parse(date);
+            
+            String day = new SimpleDateFormat("d").format(dateToSelect);
+            String month = new SimpleDateFormat("MMMM").format(dateToSelect);
+            String year = new SimpleDateFormat("yyyy").format(dateToSelect);
+            
+            String monthYearToBeSelected = month + " " + year;
+            String monthYearDisplayed = getElement("monthyear_css").getText();
+            
+            while(!monthYearToBeSelected.equals(monthYearDisplayed)) { 
+//                click("dateBackButton_xpath");
+                getElement("dateBackButton_xpath").click();
+                monthYearDisplayed = getElement("monthyear_css").getText();
+            }
+            driver.findElement(By.xpath("//td[text()='" + day + "']")).click();
+        } catch(Exception e) { 
+            logError(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void datePickerFromSlidingCalendar(String suppliedDate) { 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try { 
+            Date dateYear = dateFormat.parse(suppliedDate);
+            Date currentDate = new Date();
+            driver.findElement(By.id(prop.getProperty("calendarPreferDate1_id"))).click();
+            String year = new SimpleDateFormat("yyyy").format(dateYear);
+            String month = new SimpleDateFormat("MMMM").format(dateYear);
+            
+            String appDate = month + " " + year;
+            System.out.println("Supplied Calendar Month and Year : " + appDate);
+            
+            String monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            System.err.println("Getting Calendar Month and Year : " + monthYearDisplayed);
+            
+            while(!appDate.equals(monthYearDisplayed)) { 
+                if(dateYear.compareTo(currentDate) == 1)  
+                    driver.findElement(By.xpath(prop.getProperty("backwardCalendarClick_xpath"))).click();
+                else if(dateYear.compareTo(currentDate) == -1) 
+                    driver.findElement(By.xpath(prop.getProperty("forwardCalendarClick_xpath"))).click();     
+                monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            }
+        
+            // Select Day
+            String day = new SimpleDateFormat("d").format(dateYear);
+            System.err.println("Supplied Date Day : " + day);
+            WebElement calendarDay = driver.findElement(By.xpath("//a[text()='"+day+"']"));
+            calendarDay.click();
+        } 
+        catch(ParseException e) { 
+            e.printStackTrace();
+        }
+    }
+//    public static void selectFromDropDown(WebElement element, String selectable) { 
+//        Select dropdown = new Select(element);
+//        dropdown.selectByVisibleText(selectable);
+//    }
+//    public void datePickerFromDropDownCalendar(String suppliedDate) { 
+//        SimpleDateFormat datFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            Date dob_year = datFormat.parse(suppliedDate);
+//            driver.findElement(By.id(prop.getProperty("dobCalendar_id"))).click();
+//            
+//            // Select Year
+//            String year = new SimpleDateFormat("yyyy").format(dob_year);
+//            System.out.println("Supplied Date Year : " + year);
+//            WebElement calendarYear = driver.findElement(By.xpath(prop.getProperty("dobCalendarYear_xpath")));
+//            selectFromDropDown(calendarYear, year);
+//            // Select Month
+//            
+//            String month = new SimpleDateFormat("MMM").format(dob_year);
+//            System.out.println("Supplied Date Month : " + month);
+//            WebElement calendarMonth = driver.findElement(By.xpath(prop.getProperty("dobCalendarMonth_xpath")));
+//            selectFromDropDown(calendarMonth, month);
+//            
+//            // Select Day
+//            String day = new SimpleDateFormat("d").format(dob_year);
+//            System.out.println("Supplied Date Day : " + day);
+//            WebElement calendarDay = driver.findElement(By.xpath("//a[text()='"+day+"']"));
+//            calendarDay.click();
+//            
+//        } catch(ParseException e) { 
+//            e.printStackTrace();
+//        }
+//    }
+    
     public void select() {
         
     }
     
-    public void getText() {
-        
+    public String getText(String locatorKey) {
+        i("Getting the Text from : " + locatorKey);
+        return getElement(locatorKey).getText();
+    }
+    public void clear(String locatorKey) { 
+        i("Clear the Default text from " + locatorKey);
+        getElement(locatorKey).clear();
     }
     
     public void navigate() {
@@ -166,6 +271,12 @@ public class GenericKeywords {
     }
     
     public void acceptAlert() {
+        i("Accepting the Alert");
+        driver.switchTo().alert().accept();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(GLOBAL_IMPLICIT_WAIT_TIME));
+        wait.until(ExpectedConditions.alertIsPresent());
+        i("Accepted the alert successfully");
+        
         
     }
     
@@ -189,7 +300,7 @@ public class GenericKeywords {
         return element;
     }
     protected boolean isElementPresent(String locatorKey) { 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(GLOBAL_IMPLICIT_WAIT_TIME));
         try { 
             wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey)));
         } catch(Exception e) { 
@@ -201,7 +312,7 @@ public class GenericKeywords {
         return true;
     }
     protected boolean isElementVisible(String locatorKey) { 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(GLOBAL_IMPLICIT_WAIT_TIME));
         try { 
             wait.until(ExpectedConditions.visibilityOfElementLocated(getLocator(locatorKey)));
         } catch(Exception e) { 
@@ -212,6 +323,41 @@ public class GenericKeywords {
         return true;
     }
     
+    public void waitForWebPageToLoad() throws InterruptedException { 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        int i = 0;
+        while(i != 10) { 
+            String state = (String) js.executeScript("return document.readyState;");
+//            System.out.println(state);
+            if(state.equals("complete"))
+                break;
+            else
+                wait(2);
+            i++;
+        }
+        i = 0; 
+        while(i != 10) { 
+            Long d = (Long) js.executeScript("return jQuery.active;");
+            System.out.println(d);
+            if(d.longValue() == 0)
+                break;
+            else
+                wait(2);
+            i++;
+        }
+    }
+    public void clickEnterKey(String locatorKey) { 
+        WebElement el = getElement(locatorKey);
+        el.sendKeys(Keys.ENTER);
+    }
+    public void wait(int time) {
+        try {
+            Thread.sleep(time * 1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     public void i(String msg) {
         System.out.println(msg);
         test.info(msg);
