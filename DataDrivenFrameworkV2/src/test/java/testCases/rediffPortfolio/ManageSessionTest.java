@@ -1,6 +1,5 @@
 package testCases.rediffPortfolio;
 
-import keywords.ApplicationKeywords;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 

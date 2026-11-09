@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -161,12 +163,103 @@ public class GenericKeywords {
         // handle the issue using user input
         // getElement(locator).sendKeys(locator);
     }
+    public void selectDateFromCalendar(String date) {
+        i("Selecting the Date :: " + date);
+        try { 
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date dateToSelect = dFormat.parse(date);
+            
+            String day = new SimpleDateFormat("d").format(dateToSelect);
+            String month = new SimpleDateFormat("MMMM").format(dateToSelect);
+            String year = new SimpleDateFormat("yyyy").format(dateToSelect);
+            
+            String monthYearToBeSelected = month + " " + year;
+            String monthYearDisplayed = getElement("monthyear_css").getText();
+            
+            while(!monthYearToBeSelected.equals(monthYearDisplayed)) { 
+//                click("dateBackButton_xpath");
+                getElement("dateBackButton_xpath").click();
+                monthYearDisplayed = getElement("monthyear_css").getText();
+            }
+            driver.findElement(By.xpath("//td[text()='" + day + "']")).click();
+        } catch(Exception e) { 
+            logError(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void datePickerFromSlidingCalendar(String suppliedDate) { 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try { 
+            Date dateYear = dateFormat.parse(suppliedDate);
+            Date currentDate = new Date();
+            driver.findElement(By.id(prop.getProperty("calendarPreferDate1_id"))).click();
+            String year = new SimpleDateFormat("yyyy").format(dateYear);
+            String month = new SimpleDateFormat("MMMM").format(dateYear);
+            
+            String appDate = month + " " + year;
+            System.out.println("Supplied Calendar Month and Year : " + appDate);
+            
+            String monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            System.err.println("Getting Calendar Month and Year : " + monthYearDisplayed);
+            
+            while(!appDate.equals(monthYearDisplayed)) { 
+                if(dateYear.compareTo(currentDate) == 1)  
+                    driver.findElement(By.xpath(prop.getProperty("backwardCalendarClick_xpath"))).click();
+                else if(dateYear.compareTo(currentDate) == -1) 
+                    driver.findElement(By.xpath(prop.getProperty("forwardCalendarClick_xpath"))).click();     
+                monthYearDisplayed = driver.findElement(By.xpath(prop.getProperty("calendarPrederDate1Title_xpath"))).getText();
+            }
+        
+            // Select Day
+            String day = new SimpleDateFormat("d").format(dateYear);
+            System.err.println("Supplied Date Day : " + day);
+            WebElement calendarDay = driver.findElement(By.xpath("//a[text()='"+day+"']"));
+            calendarDay.click();
+        } 
+        catch(ParseException e) { 
+            e.printStackTrace();
+        }
+    }
+//    public static void selectFromDropDown(WebElement element, String selectable) { 
+//        Select dropdown = new Select(element);
+//        dropdown.selectByVisibleText(selectable);
+//    }
+//    public void datePickerFromDropDownCalendar(String suppliedDate) { 
+//        SimpleDateFormat datFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            Date dob_year = datFormat.parse(suppliedDate);
+//            driver.findElement(By.id(prop.getProperty("dobCalendar_id"))).click();
+//            
+//            // Select Year
+//            String year = new SimpleDateFormat("yyyy").format(dob_year);
+//            System.out.println("Supplied Date Year : " + year);
+//            WebElement calendarYear = driver.findElement(By.xpath(prop.getProperty("dobCalendarYear_xpath")));
+//            selectFromDropDown(calendarYear, year);
+//            // Select Month
+//            
+//            String month = new SimpleDateFormat("MMM").format(dob_year);
+//            System.out.println("Supplied Date Month : " + month);
+//            WebElement calendarMonth = driver.findElement(By.xpath(prop.getProperty("dobCalendarMonth_xpath")));
+//            selectFromDropDown(calendarMonth, month);
+//            
+//            // Select Day
+//            String day = new SimpleDateFormat("d").format(dob_year);
+//            System.out.println("Supplied Date Day : " + day);
+//            WebElement calendarDay = driver.findElement(By.xpath("//a[text()='"+day+"']"));
+//            calendarDay.click();
+//            
+//        } catch(ParseException e) { 
+//            e.printStackTrace();
+//        }
+//    }
+    
     public void select() {
         
     }
     
-    public void getText() {
-        
+    public String getText(String locatorKey) {
+        i("Getting the Text from : " + locatorKey);
+        return getElement(locatorKey).getText();
     }
     public void clear(String locatorKey) { 
         i("Clear the Default text from " + locatorKey);
@@ -252,6 +345,10 @@ public class GenericKeywords {
                 wait(2);
             i++;
         }
+    }
+    public void clickEnterKey(String locatorKey) { 
+        WebElement el = getElement(locatorKey);
+        el.sendKeys(Keys.ENTER);
     }
     public void wait(int time) {
         try {

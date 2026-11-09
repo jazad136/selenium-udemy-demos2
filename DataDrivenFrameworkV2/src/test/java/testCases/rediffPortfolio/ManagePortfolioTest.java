@@ -18,7 +18,7 @@ public class ManagePortfolioTest extends BaseTest{
         app.type("portfolioname_id", portfolioName);
         app.click("confirmCreatePortfolio_id");
         app.waitForWebPageToLoad();
-        app.validateSelectedValueInDropdown(portfolioName, "portfolio_dropdown_id");
+        app.validateSelectedValueInDropdown("portfolio_dropdown_id", portfolioName);
         app.reportAll();
     }
     @Test

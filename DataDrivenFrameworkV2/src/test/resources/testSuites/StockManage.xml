@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM 'testng-1.0.dtd'>
+<suite name="Full Suite">
+    <listeners>
+        <listener class-name="testListener.MyTestNGListener" />
+    </listeners>
+    <test name="Add Stock Test">
+        <classes>
+            <class name="testCases.rediffPortfolio.ManageSessionTest">
+                <methods>
+                    <include name="doLogin"/>
+                </methods>
+            </class>
+            <class name="testCases.rediffPortfolio.ManagePortfolioTest">
+                <methods>
+                    <!--<include name="createPortfolio"/>-->
+                    <include name="selectPortfolio"/>
+                </methods>
+            </class>
+            <class name="testCases.rediffPortfolio.ManageStocksTest">
+                <methods>
+                    <include name="addStockTest"/>
+                    <include name="verifyStockIsPresent"/>
+                    <include name="verifyStockQuantity"/>
+                    <include name="verifyTransactionHistory"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Modify Stock Test - Sell Stock">
+        <classes>
+            <class name="testCases.rediffPortfolio.ManageSessionTest">
+                <methods>
+                    <include name="doLogin"/>
+                </methods>
+            </class>
+            <class name="testCases.rediffPortfolio.ManagePortfolioTest">
+                <methods>
+                    <!--<include name="createPortfolio"/>-->
+                    <include name="selectPortfolio"/>
+                </methods>
+            </class>
+            <class name="testCases.rediffPortfolio.ManageStocksTest">
+                <methods>
+                    <include name="verifyStockIsPresent"/>
+                    <include name="selectStockTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite><!-- Suite -->
