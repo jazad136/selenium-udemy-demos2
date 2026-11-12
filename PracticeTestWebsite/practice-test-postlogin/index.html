@@ -7,7 +7,7 @@
 <meta name="template" content="Modern Store Modified 1.14">
 
 <!-- This site is optimized with the Yoast SEO plugin v28.2 - https://yoast.com/product/yoast-seo-wordpress/ -->
-<title>Practice | Practice Test Automation</title>
+<title>Test Post Login | Practice Test Automation</title>
 <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="jquery-ui-1.14.2/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     
@@ -808,7 +808,6 @@
 			/*# sourceURL=core-block-supports-inline-css */
 		</style>
 		
-		<script src="./index_files/wp-emoji-release.min.js.download" defer=""></script>
 		<style id="fit-vids-style">
 			.fluid-width-video-wrapper {
 				width: 100%;
@@ -1060,14 +1059,6 @@
 				display: none
 			}
 		</style>
-		<link rel="icon"
-			href="https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/cropped-5.png?fit=32%2C32&amp;ssl=1"
-			sizes="32x32">
-		<link rel="icon"
-			href="https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/cropped-5.png?fit=192%2C192&amp;ssl=1"
-			sizes="192x192">
-		<link rel="apple-touch-icon"
-			href="https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/cropped-5.png?fit=180%2C180&amp;ssl=1">
 		<meta name="msapplication-TileImage"
 			content="https://i0.wp.com/practicetestautomation.com/wp-content/uploads/2019/10/cropped-5.png?fit=270%2C270&amp;ssl=1">
 		</head>
@@ -1191,18 +1182,26 @@
                                     href="../practice-test-login/index.html" style="color:#ffffff">Log out</a>
                             </div>
 							<section id="portfolio-section">
+								<form id="portfolioForm">
 								<h3>My portfolios</h3>
 								<div>
-									<select id="portfolios">
+									<select id="portfolioList">
 										<option>--</option>
 									</select>
 								</div>
+								</form>
 							</section>
                             <div class="wp-block-button aligncenter is-style-fill"><a
                                     class="wp-block-button__link 
                                     has-text-color has-background has-very-dark-gray-background-color"
                                     id="createPortfolioDialogOpen"
                                     href="#" style="color:#ffffff">Create Portfolio</a>
+                            </div>
+							<div class="wp-block-button aligncenter is-style-fill"><a
+                                    class="wp-block-button__link 
+                                    has-text-color has-background has-very-dark-gray-background-color"
+                                    id="deletePortfolioDialogButton"
+                                    href="#" style="color:#ffffff">Delete Portfolio</a>
                             </div>
                         </div>
                     </div>
@@ -1250,15 +1249,14 @@
 				} 
             ], 
             close: function() { 
-                form[ 0 ].reset();
+				$('#portfolioList').prop('selectedIndex',0);
             }
         }).attr('id', 'createPortfolioDialog')
         function createPortfolio() { 
-			$('#portfolios').append($('<option>', {
-				value: 1,
-				text: $('#portfolioname').attr('value')
-			}))
-            dialog.dialog('close')
+			const portName = $('#portfolioname').val()
+			$('#portfolioList').prepend($(`<option selected='selected' value='${portName}'>${portName}</option>`)).selectmenu();
+			$("#portfolioList").selectmenu('refresh')
+            dialog.dialog('close');
         }
         form = dialog.find( 'form' ).on( 'submit', function( event ) {
             event.preventDefault();
@@ -1270,7 +1268,7 @@
             // alert("You clicked Create Portfolio");
             dialog.dialog('open')  
         });
-		$('#portfolios').selectmenu()
+		$('#portfolioList').selectmenu()
     });
 </script>
 </html>

@@ -1,0 +1,18 @@
+{
+    "transactions": [
+        {
+            "id" : ""
+            ,"stockValue": 1
+            ,"stockQuantity": 50
+        }
+    ],
+    "securities": [
+        {
+            "name" : "YES Bank LTD"
+            ,"stockNumberOfShares": 50
+            ,"stockPrice" : 100.0
+        }
+    ]
+
+    
+}

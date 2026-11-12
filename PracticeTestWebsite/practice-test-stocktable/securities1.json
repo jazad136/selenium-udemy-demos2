@@ -1,0 +1,9 @@
+{
+    "securities" : [
+    {
+        "securityName" : "YES Bank Ltd."
+        ,"stockNumberOfShares" : "100"
+        ,"SharePrice" : "10"
+    }
+    ]
+}
